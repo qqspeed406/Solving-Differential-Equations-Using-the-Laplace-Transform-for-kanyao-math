@@ -1,0 +1,170 @@
+\documentclass{report} 
+% 1. 中文支持（优先加载，避免后续宏包冲突）
+\usepackage[UTF8]{ctex} 
+% 2. 全局小四字号 + 排版收紧（保留原配置，不修改）
+\zihao{-4}  
+\frenchspacing % 取消标点后额外间距
+\setlength{\mathsurround}{0pt} % 公式左右无空白
+\setlength{\parskip}{0pt} % 段落间距为0
+%\setlength{\parindent}{2em} % 首行缩进2字符
+\linespread{1.5}
+% 3. 取消多余格式干扰（保留原配置）
+%\let\oldctexset\ctexset 
+%\renewcommand{\ctexset}[1]{} 
+%\setlength{\ccwd}{0pt} 
+
+% ===================== 新增：蓝色框线核心配置（兼容原模板） =====================
+% 3.1 颜色定义（完全参考 main-table.txt，统一蓝色系，无冲突）
+\usepackage[table,xcdraw]{xcolor} % 表格颜色+框线支持（必须带table/xcdraw选项）
+\definecolor{Cblue}{RGB}{14,138,235}   % 主蓝色（表格框线/文本框边框）
+\definecolor{dblue}{RGB}{250,235,248}  % 浅蓝背景（表格表头/文本框）
+% 3.2 文本框样式（蓝色框线+阴影，适配原模板小四字号）
+\usepackage[skins,breakable]{tcolorbox} % 加载tcolorbox核心功能
+\tcbuselibrary{listings,breakable} % 兼容main-table.txt的文本框需求
+\tcbset{
+	boxrule=1.2pt,        % 框线粗细（与main-table.txt一致）
+	rounded corners,  % 圆角（避免尖锐边框，更美观）
+	enhanced,             % 增强模式（支持阴影，不影响兼容性）
+	drop fuzzy shadow,    % 模糊阴影（提升质感，无编译风险）
+	colback=dblue!15!white, % 浅蓝背景（不刺眼，适配正文）
+	colframe=Cblue,       % 框线颜色（主蓝色，统一风格）
+	top=10pt,
+	bottom=0pt
+}
+\lstset{
+	basicstyle=\normalsize\ttfamily\lst@ifdisplaystyle\small\fi,
+	tabsize=1,
+	language=TeX,
+	breaklines=true,	
+	numbers=none,	
+	numberstyle=\tiny\sffamily\color{Cblue!40!blue},
+	numbersep=0em,
+	keepspaces=true,
+	keywordstyle=\color{Cblue},
+	commentstyle=\color{gray},
+	stringstyle=\color{green},
+	emph={pmatrix,\,gather,aligned,align,equation,iiint,iint,int,
+		pNiceMatrix,bNiceMatrix,BNiceMatrix,vNiceMatrix,VNiceMatrix,tabular,tblr,array},
+	emphstyle={\color{magenta}},
+	captionpos = t,
+	frame = tb,
+	framerule=0pt,
+	rulecolor = \color{green},
+}
+% 3.3 表格宏包配置（保留原tabularray，新增蓝色框线默认参数）
+\usepackage{tabularray} % 原模板已加载，新增配置不冲突
+\usepackage{multirow}   % 单元格合并（与tabularray完全兼容）
+\usepackage{multicol}
+% ==============================================================================
+
+% 4. 进度条宏包（保留原配置，无冲突）
+\usepackage{progressbar}
+\progressbarchange{width=2.5cm, heightr=0.8, filledcolor=green!60, emptycolor=gray!20, subdivisions=5}
+
+% 5. 英文字体 + 图片 + 单位 + 公式（保留原配置，无修改）
+%\usepackage{newtxtext, newtxmath} 
+\usepackage{graphicx}
+\usepackage{subcaption}
+\graphicspath{{./figures/}} % 图片路径已启用，无需修改
+\usepackage{siunitx}
+\usepackage{amsmath}
+\sisetup{
+	mode=text,
+	per-mode=symbol,
+	group-separator={},
+	tight-spacing=true
+}
+
+% 6. 表格/三线表 + 浮动元素 + 页面设置（保留原配置，无冲突）
+\usepackage{booktabs,makecell, caption}
+\usepackage{float, placeins, array}
+\usepackage{geometry}
+\geometry{
+	a4paper,                
+	top=1.5cm,              
+	bottom=2.54cm,          
+	left=3.17cm,            
+	right=3.17cm,           
+	head=0.8cm,             
+	foot=1.0cm,             
+	headsep=0.4cm,          
+	footskip=0.5cm,         
+	includehead,            
+	includefoot,            
+	marginparwidth=0cm,
+	marginparsep=0cm
+}
+
+% 7. 其他辅助宏包（保留原配置，无新增冲突）
+%%%%%%%%%%%%%%%%%%%%%%%%%menukeys%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{menukeys}
+% 导言区添加（基于你的现有设置，无需额外加载包）
+\newcommand{\done}[1]{\textcolor{cyan}{#1}} % 已完成任务：一键标cyan
+\newcommand{\todo}[1]{\textcolor{gray}{#1}} % 未完成任务：一键标gray
+%%%%%%%%%%%%%%-menukeys%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{animate}
+\usepackage{forest}
+%\usepackage{adjustbox} % 未启用不影响当前表格功能，保留注释
+\usepackage{enumitem}
+\usepackage{indentfirst}
+
+\usepackage{fancyhdr, calc}
+\usepackage{titlesec}
+\usepackage[numbers, super, square, sort&compress]{natbib}
+
+% 8. 页眉页脚设置（保留原配置，无修改）
+\pagestyle{fancy} 
+\fancyhf{} 
+\chead{\makebox[\textwidth][c]{\zihao{-5}\bfseries\heiti\leftmark}} 
+\cfoot{\zihao{-4}\makebox[\textwidth][c]{\thepage}} 
+\renewcommand{\headrulewidth}{0.3pt} 
+\renewcommand{\footrulewidth}{0pt} 
+\renewcommand{\chaptermark}[1]{%
+	\ifnum\value{chapter}=0 
+	\markboth{#1}{}%
+	\else 
+	\markboth{第\zhnumber{\thechapter}章 \ #1}{}%
+	\fi
+}
+\fancyheadoffset{0pt}
+\fancyfootoffset{0pt}
+
+% 9. 章节标题格式（保留原配置，无修改）
+\titleformat{\chapter}
+{\vspace*{-5.0em}\centering\heiti\zihao{-2}\bfseries} 
+{第\zhnumber{\thechapter} 章} 
+{1em} 
+{\vspace{0em}}
+
+% 10. 计数器与表格列类型（保留原配置，无修改）
+\counterwithin{table}{chapter}
+\counterwithin{figure}{chapter}
+\newcommand{\PreserveBackslash}[1]{\let\temp=\\#1\let\\=\temp}
+\newcolumntype{C}[1]{>{\PreserveBackslash\centering\arraybackslash}p{#1}}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\newcolumntype{Z}{>{\raggedleft\arraybackslash}p{1.8cm}}
+\newcommand{\appendixchapter}[1]{
+	\chapter*{附录\Alph{chapter} \ #1}
+	\addcontentsline{toc}{chapter}{附录\Alph{chapter} \ #1}
+	\refstepcounter{chapter}
+}
+
+% 11. 最后加载hyperref（必须在最后，保留原配置）
+\usepackage[colorlinks, linkcolor=blue, citecolor=black]{hyperref} 
+
+\begin{document}
+	\pagenumbering{arabic} 
+	\setcounter{chapter}{0} 
+	\input{data/chap1} % 保留原章节引用，无冲突
+	\input{data/chap2} % 保留原章节引用，无冲突
+	\input{data/chap3} % 保留原章节引用，无冲突
+	\input{data/chap4} % 保留原章节引用，无冲突
+	\input{data/chap5} % 保留原章节引用，无冲突
+	\input{data/chap6} % 保留原章节引用，无冲突
+	
+	
+	
+	
+	
+	
+\end{document}

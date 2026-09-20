@@ -1,0 +1,220 @@
+\thispagestyle{fancy}
+\pagecolor{gray!7}
+\chapter{拉氏变换概念以及微分性质}
+\section{拉式变换概念}
+
+在前述文档简介中，我对拉氏变换的概念也作了介绍，这里再回顾一下概念
+
+\fbox{概念} 对于函数$y=f(x)$,若$\int_{0}^{\infty}f\left(x\right)e^{-sx}dx$收敛，则称此为对$f(x)$的拉普拉斯变换，记为$L(y)$或$L(f(x))$，$s$为参数
+
+其中$y$或$f(x)$称为原函数，$L(y)$或$L(f(x))$称为像函数。
+
+\subsection*{从物理角度阐述拉式变换}
+
+由参考资料，拉式变化的核心意义在于将时间域的函数转换为复频域函数，从而将微分方程转化为代数方程，便于分析和求解系统响应。
+
+频域分析这块的内容我不甚了解，我将从弹簧振子例子来进行阐述
+
+
+	\begin{minipage}[c]{0.48\textwidth}
+		\begin{figure}[H] % 推荐用!ht，[H]会影响排版
+			\centering
+			\resizebox{0.44\textwidth}{!}{%
+				\begin{circuitikz}
+					% 修正：用现代语法\tikzset替代过时的\tikzstyle
+					\tikzset{every node/.style={font=\fontsize{18.2pt}{23.7pt}\selectfont}}
+					
+					% -------------------------- 地面部分（保留你的原代码，无需修改） --------------------------
+					\draw (4.875,8.75) to[short] (7.5,8.75); % 地面水平线
+					\draw (5.375,8.75) to[short] (5,8.375);   % 地面斜杠
+					\draw (5.75,8.75) to[short] (5.375,8.375);
+					\draw (6.125,8.75) to[short] (5.75,8.375);
+					\draw (6.5,8.75) to[short] (6.125,8.375);
+					\draw (6.875,8.75) to[short] (6.5,8.375);
+					\draw (7.25,8.75) to[short] (6.875,8.375);
+					
+					% -------------------------- 弹簧部分（核心修改：用zigzag装饰实现弹簧） --------------------------
+					\draw[
+					decorate, % 启用路径装饰
+					decoration={
+						name=zigzag, % 锯齿形装饰，即弹簧
+						amplitude=0.2cm, % 弹簧锯齿的高度（调整大小）
+						segment length=0.4cm, % 每个锯齿的长度（调整密度）
+						pre length=0.1cm, % 弹簧顶部的直段（和物块连接）
+						post length=0.1cm % 弹簧底部的直段（和地面连接）
+					},
+					thick % 线条粗细和原图匹配
+					] (6.25,9.15) -- (6.25,10.475); % 路径：从地面到物块底部
+					\draw[thick] (6.25,8.75)--(6.25,9.15);
+					\draw[thick] (6.25,10.475)--(6.25,10.875);
+					% -------------------------- 物块m部分（修正语法错误，保留你的样式） --------------------------
+					\draw  (5.875,11.5) rectangle (6.625,10.875); % 物块矩形
+					\node [
+					font=\fontsize{14.8pt}{19.2pt}\selectfont,
+					color={rgb,255:red,229; green,59; blue,20},
+					text opacity=1, 
+					inner xsep=0.080cm, 
+					inner ysep=0.085cm, 
+					rounded corners=0.020cm
+					] at (6.25,11.25) {$m$}; % 修正：去掉多余逗号，m用数学模式更规范
+					%				\node[text width=5cm] at (6.25,8.5){plot by 职业选手麻子太丑,2026.5.30};
+				\end{circuitikz}
+			}
+			\caption{弹簧振子}
+			\label{fig:tanhuangzhenzi}
+		\end{figure}
+	\end{minipage}
+	\hspace{-3em}
+	\begin{minipage}[c]{0.48\textwidth}
+		%	\usetikzlibrary {datavisualization.formats.functions}
+		\begin{figure}[H]
+			\centering
+			\begin{tikzpicture}
+				\datavisualization
+				[scientific axes=clean,
+				x axis={ticks=none},
+				y axis={ticks=none},
+				visualize as smooth line/.list={sin, cos},
+				cos={style=blue!50}]
+				data [set=cos, format=function] {
+					var x : interval[0:6*pi];
+					func y = cos(\value x r);
+				};
+				\node[font=\tiny,text width=5.5cm] at (3.65,-0.1){plot by 职业选手麻子太丑,2026.5.30};
+			\end{tikzpicture}
+			\hspace{-3.7em} \caption{图像$y=Acos\left(\omega t\right)$}
+			\label{Acoswt}
+		\end{figure}
+	\end{minipage}
+	
+	\vspace{15pt}
+
+有弹簧振子如图\ref{fig:tanhuangzhenzi}所示,给小物块$m$一个微小扰动，当没有空气阻力时，弹簧振子（小物块m）作往返循环运动，只有势能和动能之间的相互转化，弹簧振子的运动方程为，$y=Acos\left(\omega t\right)$,如图\ref{Acoswt}所示,其中$A$为振幅，$\omega$为角频率.
+
+当考虑到空气阻力时，$f=\gamma v$,其中$f$为空气阻力，$\gamma$为阻尼系数，$v$为速度，则此时弹簧振子的运动方程为$y=Ae^{-\delta t}cos\left(\omega^{\prime}t+\phi\right)$,其中$A$为振幅，$\delta$为衰减因子，$e^{-\delta t}$为衰减函数，$\omega^{\prime}$为角频率，$\phi$为初始相位。
+
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}
+		\begin{axis}[
+			axis lines=middle,
+			xmin=0, xmax=26.5,
+			ymin=-1.1, ymax=1.1,
+			xlabel={$t$}, ylabel={$y$},
+			every axis plot/.append style={thick},
+			legend pos=north east,
+			grid=none, % 同时关闭网格（因为刻度清空后网格也无法生成）
+			trig format=rad,
+			restrict x to domain*=0:25.13274,
+			restrict y to domain*=-1:1,
+			% -------------------------- 关键修改 --------------------------
+			xtick=\empty,  % 清空所有x轴刻度（线+数字）
+			ytick=\empty,  % 清空所有y轴刻度（线+数字）
+			]
+			
+			\addplot[blue, very thick, samples=400, domain=0:25.13274] {exp(-0.15*x) * cos(x)};
+			\addplot[red!60, very thick, samples=400, domain=0:25.13274] {exp(-0.15*x)};
+			\addplot[red!60, very thick, samples=400, domain=0:25.13274] {-exp(-0.15*x)};
+			
+			\legend{$Ae^{-\delta t}cos\left(\omega^{\prime}t+\phi\right)$, $y=Ae^{-\delta t}$, $y=-Ae^{-\delta t}$}
+			\node[text width=3.3cm,font=\tiny,align=center] at (13,-0.6){plot by 职业选手麻子太丑,2026.5.30};
+		\end{axis}
+	\end{tikzpicture}
+	\caption{图像$\:y=Ae^{-\delta t}cos\left(\omega^{\prime}t+\phi\right)$}
+	\label{shuaijian-tanhuangzhenzi}
+\end{figure}
+
+由于衰减函数$e^{-\delta t}$的存在，弹簧振子的振幅将逐渐 \raisebox{1pt}{\arrowkey{>}} 0，运动停止。那么这里对运动函数$Acos\left(\omega^{\prime}t+\phi\right)\:$的拉式变换的形式，$\int_{0}^{\infty}Acos\left(\omega^{\prime}t+\phi\right)\:\cdot e^{-\delta t}dt$,为函数$y=Ae^{-\delta t}cos\left(\omega^{\prime}t+\phi\right)\:$与横坐标之间所围面积。其物理意义为，弹簧振子受扰开始运动，由于空气阻力存在而逐渐停止，这个过程中弹簧振子运动的总路程。
+
+\vspace{10pt}
+
+\fbox{例题}(2021·张宇八套卷) 若$\int_{0}^{\infty}e^{-ax}\cdot cos\left(bx\right)dx$收敛，则$a、b$的范围\underline{\hbox to 20mm{}}
+
+\fbox{解析} 由上述弹簧振子的讨论，保证$e^{-ax}$为衰减函数即可，即$a>0,b$任意
+
+\section{拉氏变换的性质}
+\subsection{原函数的微分性质}
+
+\fbox{结论}\hspace{1em} $L\left(y^{\left(n\right)}\right)=s^{n}\cdot L\left(y\right)-s^{n-1}\cdot y\left(0\right)-s^{n-2}\cdot y^{\prime}\left(0\right)-......-y^{(n-1)}\cdot\left(0\right)$
+
+
+ 其中，$y^{\left(n\right)}$为高阶导数，$L\left(y^{\left(n\right)}\right)$意为对$y$的n阶导数取拉式变换，$y(0)$为原函数$y=f(x)$在0处的值，$y^{\prime}\left(0\right)$为其一阶导数在0处的值。
+ 
+ \vspace{-15pt}
+ 
+ \begin{spacing}{2}
+ 	 \begin{center}
+ 		特别地，有
+ 		\hspace{1em}$L\left(y^{\prime\prime}\right)=s^{2}L\left(y\right)-s\cdot y\left(0\right)-y^{\prime}\left(0\right)$，$L\left(y^{\prime}\right)=sL\left(y\right)-y\left(0\right)$
+ 		
+ 		\fbox{证明} \hspace{2em} $L\left(y^{\prime}\left(x\right)\right)=\int_{0}^{\infty}y^{\prime}\left(x\right)\cdot e^{-sx}dx=\int_{0}^{\infty}e^{-sx}d\left(y\left(x\right)\right)$
+ 		
+ 		\hspace{8em}
+ 		$=e^{-sx}\cdot y\left(x\right)\left|_{0}^{\infty}\right.+s\cdot\int_{0}^{\infty}y\left(x\right)e^{-sx}dx$
+ 		
+ 		$=sL\left(y\right)-y\left(0\right)\:$
+ 	\end{center}
+ \end{spacing}
+ 
+ \vspace{-13pt}
+
+\hspace{3cm}对$L\left(y^{\prime\prime}\right)$的证明类似，此处不再赘述。
+
+以下举例(2020·数一)和(2016·数一)，这两题在内容介绍中已经讲解，此处作为例题讲解，需要出现在合适的位置
+
+\vspace{10pt}
+
+\fbox{题目} (2020·数一)设$f(x)$满足在$f^{\prime\prime}\left(x\right)+af^{\prime}\left(x\right)+f\left(x\right)=0\:\left(a>0\right)$
+
+\hspace{3em}$f\left(0\right)=m\:,\:f^{\prime}\left(0\right)=n\:,则\:\int_{0}^{\infty}f\left(x\right)dx=$\underline{\hbox to 20mm{}}
+
+\vspace{-10pt}
+
+\begin{spacing}{2.2}
+	\begin{center}
+		
+		\fbox{解析} \hspace{0.5em} 令$y=f(x)$,取拉式变换\hspace{1em}$L\left(y^{\prime\prime}\right)+aL\left(y^{\prime}\right)+L\left(y\right)=0$
+		
+		应用拉氏变换微分性质,即
+		
+		$L\left(y^{\prime\prime}\right)=s^{2}L\left(y\right)-s\cdot y\left(0\right)-y^{\prime}\left(0\right)$，$L\left(y^{\prime}\right)=sL\left(y\right)-y\left(0\right)$
+		
+		由题条件，$y\left(0\right)=m\:,\:y^{\prime}\left(0\right)=n$ ,带入拉式变换后的式子
+		
+		$s^{2}L\left(y\right)-s\cdot m-n+a\left\lbrack sL\left(y\right)-m\right\rbrack+L\left(y\right)=0$
+		
+		令$s=0$,解得$L(y)=am+n$
+	\end{center}
+\end{spacing}
+
+
+
+由上述例子看出，关于积分$\int_{0}^{\infty}f\left(x\right)dx$,可以看作$\int_{0}^{\infty}f\left(x\right)e^{-sx}dx (这里s=0)$,我们将微分方程进行拉式变换后，再令s=0,解出的$L(f(x))$(或者说$L(y)$)即为所求。下面再来看一个例子。
+
+\vspace{10pt}
+
+\fbox{题目} (2016·数一)设函数$y(x)$满足方程$y^{\prime\prime}+2y^{\prime}+ky=0$,其中$0<k<1$.
+
+$(1)$ 证明$\int_{0}^{\infty}y\left(x\right)dx$收敛
+
+$(2)$若$y\left(0\right)=1\:,\:y^{\prime}\left(0\right)=1$,求$\int_{0}^{\infty}y\left(x\right)dx$值
+
+\vspace{10pt}
+
+\fbox{解析} $(1)$ 设$y\left(0\right)=C_{1}\:,\:y^{\prime}\left(0\right)=C_{2}$,对方程取拉式变换，并应用其微分性质
+
+\vspace{-10pt}
+
+\begin{spacing}{2.2}
+	\begin{center}
+		$s^{2}L\left(y\right)-s\cdot C_{1}-C_{2}+2\left\lbrack sL\left(y\right)-C_{1}\right\rbrack+k\cdot L\left(y\right)=0$
+		
+		令$s=0$,得 $L\left(y\right)=\dfrac{2C_{1}+C_{2}}{k}$,收敛
+	\end{center}
+\end{spacing}
+
+\vspace{-5pt}
+
+\hspace{3em}$(2)$ 代入$C_{1}=C_{2}=1$,得$L\left(y\right)=\dfrac{3}{k}$
+
+\clearpage

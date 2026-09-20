@@ -1,0 +1,68 @@
+\chapter{对周期函数的拉氏变换}
+
+在文档简介-内容介绍中，对$\left|sinx\right|$的拉氏变换进行了介绍。这里出现在正文中，简要过程。其实对周期函数的拉式变换的核心即为变量代换。
+
+\vspace{10pt}
+
+\fbox{题目\ref{zhouqihanshu-1}\hspace{0.5em}(2019·数一)}
+
+\vspace*{-15pt}
+
+\begin{equation}\label{zhouqihanshu-1}
+	\text{求曲线}\hspace{1em}y=e^{-x}sinx\left(x\geqslant0\right)\text{与x轴之间图形的面积}
+\end{equation}
+
+\vspace*{-35pt}
+
+\begin{gather*}
+	\text{\fbox{\scriptsize 解析}}\hspace{1em}\int_{0}^{\infty}\left|sinx\right|\cdot e^{-sx}dx=L\left\lbrack\left|sinx\right|\right\rbrack=\dfrac{1}{1-e^{-sT}}\int_{0}^{T}sinx\cdot e^{-sx}dx\\[15pt]
+	\text{注意到}\hspace{1em}T=\pi，s=1，\text{且}\hspace{1em}\int e^{ax}\cdot sin\left(bx\right)dx=\dfrac{1}{a^{2}+b^{2}}\left|_{\left(e^{ax}\right)}^{\left(e^{ax}\right)^{\prime}}\:_{^{\left(sin\left(bx\right)\right)}}^{^{\left(sin\left(bx\right)\right)^{\prime}}}\right|
+\end{gather*}
+
+\vspace{10pt}
+
+\fbox{题目\ref{zhouqihanshu-2}\hspace{0.5em}(2018·数一)}
+
+\vspace*{-15pt}
+
+\begin{equation}\label{zhouqihanshu-2}
+	\text{已知微分方程}\hspace{1em}y^{\prime}+y=f\left(x\right)，\hspace{1em}\text{其中$f(x)$}是R上的连续函数
+\end{equation}
+
+\vspace{-5pt}
+
+(1)\hspace{0.3em}若\hspace{1em}$f(x)=x$，\hspace{1em}求方程通解
+
+(2)\hspace{0.3em}若\hspace{1em}$f(x)$是周期为$T$的函数，证明：方程存在唯一的以$T$为周期的解
+
+\vspace{-30pt}
+
+\begin{gather*}
+	\text{\fbox{\scriptsize 解析}}\hspace{0.5em}\text{(1)}\hspace{1em}\text{设}\hspace{1em}y\left(0\right)=C_{1}\\[10pt]
+	\text{取拉氏变换}\hspace{1em}sL\left(y\right)-C_{1}+L\left(y\right)=\dfrac{1}{s^{2}}\\[10pt]
+	L\left(y\right)=\dfrac{1}{s^{2}\left(s+1\right)}+\dfrac{C_{1}}{s+1}=\dfrac{1}{s+1}+\dfrac{1}{s^{2}}+\dfrac{-1}{s}+\dfrac{C_{1}}{s+1}\\[10pt]
+	\text{取拉式逆变换}\hspace{1em}y=x-1+C\cdot e^{-x}\:\left(C=C_{1}+1\right)
+\end{gather*}
+
+\clearpage
+
+\hspace{0.5em}\textcolor{gray}{-------------------------------------我是分隔线-------------------------------------}
+
+\vspace{-40pt}
+
+\begin{gather*}
+	\text{\fbox{\scriptsize 解析}}\hspace{0.5em}\text{(2)}\hspace{1em}\text{设}\hspace{1em}y\left(0\right)=C\\[10pt]
+	\text{取拉式变换}\hspace{1em}sL\left(y\right)-C+L\left(y\right)=L\left\lbrack f\left(x\right)\right\rbrack \hspace{1em}\text{(这里$y$和$f(x)$是不同函数)}\\[15pt]
+	L\left(y\right)=\dfrac{C}{s+1}+\dfrac{L\left\lbrack f\left(x\right)\right\rbrack}{s+1}\\[15pt]
+	\text{取拉式逆变换}\hspace{1em}y=C\cdot e^{-x}+e^{-x}\ast f\left(x\right)\\[15pt]
+	y=C\cdot e^{-x}+\int_{0}^{x}e^{-\left(x-t\right)}\cdot f\left(t\right)dt=C\cdot e^{-x}+e^{-x}\cdot\int_{0}^{x}e^{t}\cdot f\left(t\right)dt\tag{\uppercase\expandafter{\romannumeral1}}\\[20pt]
+	\text{对于}\hspace{1em}\int_{0}^{x}e^{t}\cdot f\left(t\right)dt=\int_{0}^{T}e^{t}\cdot f\left(t\right)dt+\int_{T}^{x}e^{t}\cdot f\left(t\right)dt\\[20pt]
+	\text{对于}\hspace{1em}\int_{T}^{x}e^{t}\cdot f\left(t\right)dt\xlongequal{u=t-T}\int_{0}^{x-T}e^{u+T}\cdot f\left(u+T\right)du=e^{T}\cdot\int_{0}^{x-T}e^{t}\cdot f\left(t\right)dt\\[20pt]
+	\text{代入}\hspace{1em}y=C\cdot e^{-x}+e^{-x}\left\lbrack\int_{0}^{T}e^{t}\cdot f\left(t\right)dt+e^{T}\cdot\int_{0}^{x-T}e^{t}\cdot f\left(t\right)dt\right\rbrack\\[20pt]
+	y\left(x\right)=C\cdot e^{-x}+e^{-\left(x-T\right)}\cdot\int_{0}^{x-T}e^{t}\cdot f\left(t\right)dt+e^{-x}\cdot\int_{0}^{T}e^{t}\cdot f\left(t\right)dt\\[20pt]
+	y\left(x+T\right)=C\cdot e^{-\left(x+T\right)}+e^{-x}\cdot\int_{0}^{x}e^{t}\cdot f\left(t\right)dt+e^{-\left(x+T\right)}\cdot\int_{0}^{T}e^{t}\cdot f\left(t\right)dt\tag{\uppercase\expandafter{\romannumeral2}}\\[10pt]
+	y\left(x\right)=y\left(x+T\right)，\hspace{1em}\text{对比}\hspace{0.3em}\uppercase\expandafter{\romannumeral1}\hspace{0.3em}\text{式和}\hspace{0.3em}\uppercase\expandafter{\romannumeral2}\hspace{0.3em}\text{式}\\[15pt]
+	C\cdot e^{-x}=C\cdot e^{-x}\cdot e^{-T}+e^{-x}\cdot e^{-T}\cdot\int_{0}^{T}e^{t}\cdot f\left(t\right)dt\\[20pt]
+	\text{消去$e^{-x}$}\hspace{1em}C=C\cdot e^{-T}+e^{-T}\cdot\int_{0}^{T}e^{t}\cdot f\left(t\right)dt\\[15pt]
+	C=\dfrac{e^{-T}}{1-e^{-T}}\cdot\int_{0}^{T}e^{t}\cdot f\left(t\right)dt，\hspace{1em}\text{即当$C取此值时，符合题意$}
+\end{gather*}

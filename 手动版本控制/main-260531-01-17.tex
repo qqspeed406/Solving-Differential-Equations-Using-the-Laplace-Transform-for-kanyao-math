@@ -1,0 +1,735 @@
+\documentclass[12pt]{report} 
+% 1. 中文支持（优先加载，避免后续宏包冲突）
+\usepackage[UTF8]{ctex} 
+\usepackage{tikz}
+% 在 ctex 包之后加载
+\usepackage{background}%添加文档背景图片
+\backgroundsetup{scale=1.8,angle=90,opacity=0.16,contents={\includegraphics[width=\paperwidth, height=\paperwidth, keepaspectratio]{1.jpg}}}
+\usepackage{draftwatermark}% 添加水印
+\SetWatermarkLightness{0.82}% 添加水印
+\SetWatermarkScale{0.3}% 添加水印
+\SetWatermarkText{\tikz \node at (0,0){职业选手麻子太丑-B站qqspeed406} ;}% 添加水印
+%---------打算将文档首发于南京信息工程大学贴吧------------%
+%\SetWatermarkText{\tikz \node at (0,0){职业选手麻子太丑-B站qqspeed406} ; \\ \hspace{-1em} \tikz \node at (0,-1){网络首发-南京信息工程大学贴吧};}% 添加水印
+%---------打算将文档首发于南京信息工程大学贴吧------------%
+\usepackage[english]{babel}%英文断句
+\usepackage{fontspec}
+% 设置主字体为 Times New Roman，与 newtxtext 效果一致
+\setmainfont{Times New Roman}
+\usepackage{amsmath,mathtools} % mathtools是amsmath的增强版，优化公式排版
+\usepackage{amsfonts,amssymb}  % 补充常用数学符号
+\usepackage{newtxmath}
+\usepackage{mathrsfs} % 关键：导入花体字母宏包
+% 2. 全局小四字号 + 排版收紧（保留原配置，不修改）
+%\zihao{-4}  
+\frenchspacing % 取消标点后额外间距
+\setlength{\mathsurround}{0pt} % 公式左右无空白
+\setlength{\parskip}{0pt} % 段落间距为
+%\setlength{\parindent}{2em} % 首行缩进2字符
+\linespread{1.7}
+\usepackage{setspace}
+% 3. 取消多余格式干扰（保留原配置）
+%\let\oldctexset\ctexset 
+%\renewcommand{\ctexset}[1]{} 
+%\setlength{\ccwd}{0pt} 
+
+% ===================== 新增：蓝色框线核心配置（兼容原模板） =====================
+% 3.1 颜色定义（完全参考 main-table.txt，统一蓝色系，无冲突）
+% \hlcustom{文本}：黄色高亮，0.5pt内边距（避免高亮框紧贴文字）
+\newcommand{\hlcustom}[1]{%
+	\colorbox{yellow!50}{%        % 高亮颜色（yellow!50=浅黄，可改）
+		\hspace{0.5pt}#1\hspace{0.5pt} % 内边距（避免文字贴框）
+	}%
+}
+\usepackage[table,xcdraw]{xcolor} %表格颜色+框线支持（必须带table/xcdraw选项）
+\usepackage[dvipsnames, svgnames, x11names]{xcolor}
+\definecolor{Cblue}{RGB}{14,138,235}   % 主蓝色（表格框线/文本框边框）
+\definecolor{dblue}{RGB}{250,235,248}  % 浅蓝背景（表格表头/文本框）
+% 3.2 文本框样式（蓝色框线+阴影，适配原模板小四字号）
+\usepackage[skins,breakable]{tcolorbox} % 加载tcolorbox核心功能
+\tcbuselibrary{listings,breakable} % 兼容main-table.txt的文本框需求
+\tcbset{
+	boxrule=1.2pt,        % 框线粗细（与main-table.txt一致）
+	rounded corners,  % 圆角（避免尖锐边框，更美观）
+	enhanced,             % 增强模式（支持阴影，不影响兼容性）
+	drop fuzzy shadow,    % 模糊阴影（提升质感，无编译风险）
+	colback=dblue!15!white, % 浅蓝背景（不刺眼，适配正文）
+	colframe=Cblue,       % 框线颜色（主蓝色，统一风格）
+	top=10pt,
+	bottom=0pt
+}
+\lstset{
+	basicstyle=\normalsize\ttfamily\lst@ifdisplaystyle\small\fi,
+	tabsize=1,
+	language=TeX,
+	breaklines=true,	
+	numbers=none,	
+	numberstyle=\tiny\sffamily\color{Cblue!40!blue},
+	numbersep=0em,
+	keepspaces=true,
+	keywordstyle=\color{Cblue},
+	commentstyle=\color{gray},
+	stringstyle=\color{green},
+	emph={pmatrix,\,gather,aligned,align,equation,iiint,iint,int,
+		pNiceMatrix,bNiceMatrix,BNiceMatrix,vNiceMatrix,VNiceMatrix,tabular,tblr,array},
+	emphstyle={\color{magenta}},
+	captionpos = t,
+	frame = tb,
+	framerule=0pt,
+	rulecolor = \color{green},
+}
+% 3.3 表格宏包配置（保留原tabularray，新增蓝色框线默认参数）
+\usepackage{tabularray} % 原模板已加载，新增配置不冲突
+\usepackage{multirow}   % 单元格合并（与tabularray完全兼容）
+\usepackage{multicol}
+\usepackage{dashrule}
+\usepackage{longtable} % 长表格跨页支持，与其他表格宏包无冲突
+\usepackage{typicons}
+\usepackage{fontawesome}
+\usepackage{fontmfizz}
+\usepackage{fancybox}
+\usepackage{fbox}
+% ==============================================================================
+
+% 4. 进度条宏包（保留原配置，无冲突）
+\usepackage{progressbar}
+\progressbarchange{width=2.5cm, heightr=0.8, filledcolor=green!60, emptycolor=gray!20, subdivisions=5}
+
+% 5. 英文字体 + 图片 + 单位 + 公式（保留原配置，无修改）
+%\usepackage{newtxtext, newtxmath} 
+%\usepackage{newtxmath} 
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage{subcaption}
+\graphicspath{{./figures/}} % 图片路径已启用，无需修改
+\usepackage{siunitx}
+\sisetup{
+	mode=text,
+	per-mode=symbol,
+	group-separator={},
+	tight-spacing=true
+}
+
+% 6. 表格/三线表 + 浮动元素 + 页面设置（保留原配置，无冲突）
+\usepackage{booktabs,makecell, caption}
+\usepackage{float, placeins, array}
+\usepackage{geometry}
+\geometry{
+	a4paper,                
+	top=1.5cm,              
+	bottom=2.54cm,          
+	left=3.17cm,            
+	right=3.17cm,           
+	head=0.8cm,             
+	foot=1.0cm,             
+	headsep=0.4cm,          
+	footskip=0.5cm,         
+	includehead,            
+	includefoot,            
+	marginparwidth=0cm,
+	marginparsep=0cm
+}
+
+% 7. 其他辅助宏包（保留原配置，无新增冲突）
+%%%%%%%%%%%%%%%%%%%%%%%%%menukeys%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{menukeys}
+% 导言区添加（基于你的现有设置，无需额外加载包）
+\newcommand{\done}[1]{\textcolor{cyan}{#1}} % 已完成任务：一键标cyan
+\newcommand{\todo}[1]{\textcolor{gray}{#1}} % 未完成任务：一键标gray
+%%%%%%%%%%%%%%-menukeys%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{animate}
+\usepackage{forest}
+%\usepackage{adjustbox} % 未启用不影响当前表格功能，保留注释
+\usepackage{enumitem}
+\usepackage{indentfirst}
+
+
+\usepackage{fancyhdr, calc}
+\usepackage{titlesec}
+\usepackage[numbers, super, square, sort&compress]{natbib}
+
+%--------------------冗余包备用-tikz打包----------------------%
+%------------------------------------------------------------%
+%
+%\usetikzlibrary{arrows.meta,decorations.pathmorphing,backgrounds,positioning,fit,petri}
+\usetikzlibrary { decorations.pathmorphing, decorations.pathreplacing, decorations.shapes }
+%%decorations.pathmorphing重复定义了，不过问题不大
+%\usetikzlibrary {lindenmayersystems}
+%\usetikzlibrary {decorations.text}
+%\usetikzlibrary {decorations.fractals}
+%\usetikzlibrary {decorations.markings,fpu}
+%\usetikzlibrary {decorations.pathreplacing}
+%\usetikzlibrary {decorations.markings}
+%\usetikzlibrary {decorations.footprints}
+%\usetikzlibrary {spy}
+%\usetikzlibrary {bending}
+%\usetikzlibrary {perspective}
+%\usepgfkeyslibrary {filtered}
+%\usepackage {amsmath}
+%\usetikzlibrary {math}
+%\usetikzlibrary{calc,intersections,through}
+%\usetikzlibrary {shapes.misc}
+%\usetikzlibrary {graphs}
+%\usetikzlibrary {angles,quotes}
+%\usetikzlibrary {patterns}
+%\usetikzlibrary {patterns.meta}
+%\usetikzlibrary {fadings}
+%\usetikzlibrary{animations}
+%\usetikzlibrary {graphs.standard,graphdrawing}
+%\usegdlibrary {trees}
+%\usegdlibrary {force}
+%\usegdlibrary {layered}
+%\usegdlibrary {circular}
+%\usegdlibrary{phylogenetics}
+%\usegdlibrary{routing}
+%\usegdlibrary {examples}
+%\usetikzlibrary {3d}
+%\usetikzlibrary {er}
+%\usetikzlibrary {calendar}
+%\usetikzlibrary {chains}
+\usepackage{circuitikz}    % 关键：电路/符号绘图宏包
+\usetikzlibrary {circuits}
+\usetikzlibrary {circuits.ee.IEC}
+%\usetikzlibrary {circuits.logic.US}
+%\usetikzlibrary {circuits.logic.IEC}
+%\usetikzlibrary {circuits.logic.CDH}
+%\usetikzlibrary {mindmap}
+%\usetikzlibrary {folding}
+%\usepgflibrary{plothandlers}
+%\usepgflibrary{plotmarks}
+%\usetikzlibrary {turtle}
+%\usetikzlibrary {views}
+%\usepackage{pgffor}
+%\usepackage {pgfcalendar}
+%\usepackage{pgfcore}
+%\usepackage{pgf}
+%\usepgfmodule{decorations}
+%\usepgfmodule{plot}
+%\usepackage {xxcolor}
+%\usepackage[dvipsnames, svgnames, x11names]{xcolor}
+%\usepackage {calc}
+\usetikzlibrary {datavisualization.formats.functions}
+%\usetikzlibrary {datavisualization}
+%\usetikzlibrary {datavisualization.polar}
+%\usetikzlibrary {shapes.geometric} 
+%\usetikzlibrary {shapes.multipart}
+%\usetikzlibrary {shapes.symbols}
+%\usetikzlibrary {shapes.arrows}
+%\usepgflibrary{shapes.callouts}
+%\usetikzlibrary {fit}
+%\usepgfmodule {nonlineartransformations}
+%\usetikzlibrary {curvilinear}
+%\usetikzlibrary {automata}
+%\usetikzlibrary {graphs.standard}
+%\usetikzlibrary {matrix}
+%\usetikzlibrary {arrows,shapes.geometric}
+%\usetikzlibrary{shadows}
+%\usetikzlibrary{shadings}
+%\usepgflibrary{shadings}
+%%\usetikzlibrary {graphdrawing}
+%%\usegdlibrary {layered}
+\usepackage{pgfplots}
+%\usepackage{menukeys}
+%\usetikzlibrary{scopes}
+\pgfplotsset{compat=1.17}
+
+%--------------------冗余包备用-tikz打包----------------------%
+%--------------------冗余包备用-tikz打包----------------------%
+
+% 8. 页眉页脚设置（保留原配置，无修改）
+\pagestyle{fancy} 
+\fancyhf{} 
+\chead{\makebox[\textwidth][c]{\zihao{-5}\bfseries\heiti\leftmark}} 
+\cfoot{\zihao{-4}\makebox[\textwidth][c]{\thepage}} 
+\renewcommand{\headrulewidth}{0.3pt} 
+\renewcommand{\footrulewidth}{0pt} 
+\renewcommand{\chaptermark}[1]{%
+	\ifnum\value{chapter}=0 
+	\markboth{#1}{}%
+	\else 
+	\markboth{第\zhnumber{\thechapter}章 \ #1}{}%
+	\fi
+}
+\fancyheadoffset{0pt}
+\fancyfootoffset{0pt}
+
+% 9. 章节标题格式（保留原配置，无修改）
+\titleformat{\chapter}
+{\vspace*{-5.0em}\centering\heiti\zihao{-2}\bfseries} 
+{第\zhnumber{\thechapter} 章} 
+{1em} 
+{\vspace{0em}}
+
+% 5. 无编号章节（如\chapter*{绪论}）页眉适配：手动设置页眉内容
+\renewcommand{\chaptermark}[1]{%
+	\ifnum\value{chapter}=0 % 无编号章节（绪论）
+	\markboth{#1}{}% 直接显示章节名（如“绪论”）
+	\else % 有编号章节
+	\markboth{第\zhnumber{\thechapter}章 \ #1}{}% 显示“第X章 标题”
+	\fi
+}
+
+% 6. 消除页眉默认缩进，确保居中精准
+\fancyheadoffset{0pt}
+\fancyfootoffset{0pt}
+
+% 10. 计数器与表格列类型（保留原配置，无修改）
+\counterwithin{table}{chapter}
+\counterwithin{figure}{chapter}
+\newcommand{\PreserveBackslash}[1]{\let\temp=\\#1\let\\=\temp}
+\newcolumntype{C}[1]{>{\PreserveBackslash\centering\arraybackslash}p{#1}}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\newcolumntype{Z}{>{\raggedleft\arraybackslash}p{1.8cm}}
+\newcommand{\appendixchapter}[1]{
+	\chapter*{附录\Alph{chapter} \ #1}
+	\addcontentsline{toc}{chapter}{附录\Alph{chapter} \ #1}
+	\refstepcounter{chapter}
+}
+
+% 11. 最后加载hyperref（必须在最后，保留原配置）
+\usepackage[colorlinks, linkcolor=blue, citecolor=black]{hyperref}
+
+%\title{考研数学快速解题补充方法集}
+%\author{\small edit by 职业选手麻子太丑\\
+%	\small review by 诸葛孔明，小瘦子，飞天柯基，曾老师，眉毛兄}
+%\date{\today}
+ 
+
+\begin{document}
+
+%-------------------------这是标题页-----------------------------%
+
+\begin{titlepage} % <-- 标题页环境开始
+	
+	\pagecolor{gray!7}
+	
+	\centering % 所有内容居中
+	
+	\vspace*{3cm} 
+	{\Huge\bfseries 考研数学快速解题补充方法集} 
+	
+	\vspace{1.5cm} 
+	{\Large edit by 职业选手麻子太丑--B站ID:qqspeed406}
+	
+	\vspace{1cm}
+	
+	{\large reviewed by 诸葛孔明，小瘦子，飞天柯基，曾老师，眉毛兄}
+
+    \vspace{0.5cm}
+
+	{ latest shuaxin at \today}
+	
+	
+	
+	
+	
+\end{titlepage} % <-- 标题页环境结束
+%-------------------------以上是标题页-----------------------------%
+
+%-------------------------这是本书简介--------------------------%
+
+   \chapter*{文档简介}
+   \thispagestyle{empty} % 🔴 report类支持：取消当前页页码
+   \subsection*{\centering 写作背景}
+   此文档为B站视频\href{https://b23.tv/R8F4RW5}{考研数学快速解题补充方法集-哔哩哔哩}的pdf文档版。此视频开始录制时间为2020.12.28，几乎是考完试一周内录制好，趁状态还在赶紧将功法抄录，主要内容为我备考时关于解题的一些心得体会。而文档的写作却一直在延期(delay得力)，虽然一直有将其制作为pdf文档的想法。一来各种杂事处理，二来确实不会制作包含大量公式算符的数学文档，耽搁了这么久确实遗憾。后续几经辗转，手写的数学笔记几乎全部丢失，参考书习题集也尽失，好在此视频的原草稿还在，可以说是最后的残卷，虽十不存一，如飘渺灵鹫宫石壁画隐去，如大理琅嬛福地深埋，如少林寺藏经阁历经火灾，但一缕残魂犹在，浪里淘沙，落日余晖。
+   此文档开始制作时间为2026.5.28。之前和诸葛孔明、小瘦子、飞天柯基在破破烂烂烤肉店一聚时立下flag:"将在两星期后开始写pdf版，到时请朋友们作序"。希望可以实现这个flag,也作为博士录取的纪念。
+   
+   数学文档使用latex来写较为合适。2025.10.20开始撰写科研计划书，使用latex方式，也开始了对latex入门学习，借豆包的帮助下完善main文档的模板，后续还需学习git工具对tex文档进行版本控制，也可能推送到github站共享此数学文档。latex呈现出的公式符号等确实较为规范，但多个美元符号括起来的繁琐形式，多个特殊字符、积分运算符号对应的语法，确实令人头疼，查找对应的表达式再输入很费时费力。虽然在线latex公式编辑站也较为成熟，但仍需鼠标进行大量拖拽操作。在latexstudio公众号上我发现了mathdown的工具，听起来和markdown挺像的，它确实也可以看作是集成了数学公式编辑的markdown编辑器。我在这里将其作为公式编辑工具，它最友好的特点是自动补全功能，我将公式复制粘贴进latex编辑器中。
+   
+   以下对内容进行介绍
+   
+   \clearpage
+   
+   \chapter*{文档简介}
+   \pagenumbering{roman}
+   \subsection*{\centering 内容介绍}
+   我在复习备考过程中，发现参考书中的解法步骤很繁琐，也很难看懂；好不容易跟着范例步骤推演理解后，遇到类似的问题却又很难快速解答。我刚开始使用李永乐、王式安复习全书，其中2019数一第17题令人印象深刻。
+   
+   \fbox{题目}：求曲线$y=e^{-x}sinx\left(x\geqslant0\right)$与x轴之间图形的面积
+   
+   \vspace{10pt}
+   
+  \begin{tabular}{@{\hspace{0.2em}} >{\centering\arraybackslash}m{53mm} @{\hspace{0.2em}} >{\centering\arraybackslash}m{8cm} }
+  	\fbox{分析}：{\scriptsize 如图，由于衰减函数的存在，sinx沿着衰减函数的路径，峰值逐渐减小，在x轴附近震荡。题目问的是面积，那么也即蓝色线条与x轴之间所围面积之和。你也可以把x轴以下的蓝线直接翻上来，翻上来图形的顶点也沿衰减函数，这里没有画出来。常规思路是分组，将x轴上面的蓝线所围面积相加，x轴下方面积相加}
+  	& \begin{tikzpicture}
+  		\begin{axis}[
+  			axis lines=middle,
+  			xmin=0, xmax=22, % 保留0~6π完整范围
+  			ymin=-0.5, ymax=1.2,       % 调整y轴范围为-1到1，以显示sin(x)
+  			xtick=\empty,  % 清空所有x轴刻度（线+数字）
+  			ytick=\empty,  % 清空所有y轴刻度（线+数字）
+  			xlabel={\empty}, ylabel={$y$},
+  			every axis plot/.append style={thick},
+  			legend pos=north east,
+  			grid=none,
+  			trig format=rad,
+  			restrict x to domain*=0:20.7,
+  			restrict y to domain*=-0.5:1,
+  			]
+  			
+  			% 采样点增加到400，捕捉所有微小震荡
+  			\addplot[blue, very thick, samples=400, domain=0:20.7] {exp(-0.15*x) * sin(x)};
+  			\addplot[red, very thick, samples=400, domain=0:20.7] {exp(-0.15*x)};
+  			% 添加黑色的y=sin(x)曲线
+  			% 		\addplot[black, samples=400, domain=0:18.84956] {sin(x)};
+  			
+  			% 更新图例，包含三条曲线
+  			\legend{$y=e^{-x}\sin x$, $y=e^{-x}$}
+  			\node[text width=3.3cm,font=\tiny,align=center] at (11,-0.4){plot by 职业选手麻子太丑,2026.5.28};
+  		\end{axis}
+  	\end{tikzpicture}
+  \end{tabular}
+  
+  \vspace{5pt}
+  
+  李王复习全书中给出的方法是分组，将积分转为无穷小区间。原书内容我找不到了，现找到文都考研给出的方法如下\href{https://kaoyan.wendu.com/2018/1231/128922.shtml}{2019考研数学一真题及答案解析解答题17题}，和复习全书的思路差不多
+  
+  \fbox{文都解析}:设在区间[k$\pi$,(k+1)$\pi$](k=0,1,2...n-1)上所围面积记为u\textsubscript{k},则 
+  \begin{spacing}{2.2}
+  	\begin{center}
+  		$u_{k}=\int_{k\pi}^{\left(k+1\right)\pi}e^{-x}\left|sinx\right|\:dx=\left(-1\right)^{k}\int_{k\pi}^{\left(k+1\right)\pi}e^{-x}sinx\:dx\:$
+  		
+  		记I=$\int e^{-x}sinx\:dx\:$,则
+  		
+  		\hspace{-2em} $I=-\int e^{-x}d\:\left(cosx\right)\:=-\left(e^{-x}cosx\:-\:\int cosx\:d\left(e^{-x}\right)\right)$
+  		
+  		\hspace{5.7em} $=-e^{-x}cosx-\int e^{-x}d\left(sinx\right)=-e^{-x}cosx-\left(e^{-x}sinx-\int sinx\:d\left(e^{-x}\right)\right)$
+  		
+  		\hspace{-5cm} $=-e^{-x}\left(cosx\:+\:sinx\right)-I$ 
+  		
+  		移项 \hspace{1em} $I=-\dfrac{1}{2}e^{-x}\left(cosx\:+\:sinx\right)+C$
+  		
+  		$u_{k}=\left(-1\right)^{k}\left(-\dfrac{1}{2}\right)e^{-k}\left(cosx\:+\:sinx\right)\left|\right._{k\pi}^{\left(k+1\right)\pi}=\dfrac{1}{2}\left(e^{-\left(k+1\right)\pi}+e^{-k\pi}\right)$
+  		
+  		注意到 \hspace{2em}$cosk\pi=\left(-1\right)^{k}$ 
+  		
+  		面积 \hspace{2em} $S_{n}=\sum_{k=0}^{n-1}u_{k}=\dfrac{1}{2}+\sum_{k=1}^{n}e^{-k\pi}=\dfrac{1}{2}+\dfrac{e^{-\pi}-e^{-\left(n+1\right)\pi}}{1-e^{-\pi}}$
+  		
+  		\hspace{2em} $\lim_{n\rightarrow\infty}S_{n}=\dfrac{1}{2}+\lim_{n\rightarrow\infty}\dfrac{e^{-\pi}-e^{-\left(n+1\right)\pi}}{1-e^{-\pi}}=\dfrac{1}{2}+\dfrac{e^{-\pi}}{1-e^{-\pi}}$ \hspace{1em} 通分也可
+  	\end{center}
+  \end{spacing}
+  
+  上述的解法我得看好几遍才看懂一些，首先第一步划分区间就很难想到，然后从|sinx|中提取出(-1)\textsuperscript{k}也很难想到，分部积分也有一定的难度，总之很麻烦。因此我一直在探索更简洁的解法。2020毕业季时我从毕业学姐那里以5元高价收购了一本《复变函数与积分变换》，当我翻看到拉普拉斯变换这个章节时，总觉得这个积分形式很熟悉。对一个时域函数$f(t)$，拉普拉斯变换的形式如下
+  
+  \vspace{-15pt}
+ 
+  \[
+  \mathscr{L} \{ f(t) \} = \int_{0}^{\infty} f(t) e^{-st} dt = F(s)
+  \]
+  
+   这个 $\mathscr{L}$我也手写不出来，那就记为$L$吧，对于一个函数$y=f(x)$,对y的拉普拉斯变换记为$L(y)$ ,那么有
+   
+     \vspace{-15pt}
+   
+   \[L\left(y\right)\:\:\:=\int_{0}^{\infty}f\left(x\right)e^{-sx}dx\]
+   
+   这样写就简化多了。可能这样写不怎么规范，因为不知道$f(x)$的性质，也不知道积分是否收敛（是否有意义），也不知道是单边还是双边。我们默认函数$f(x)$是连续可积可导，且单边时域积分收敛。
+   
+   初识拉普拉斯变换（以下简称拉式变换），我们不明白它为何要乘以一个衰减函数$e^{-sx}$,本来是要计算积分$\int_{0}^{\infty}f\left(x\right)dx$，为啥要多一个这样的步骤呢，它对考研数学中的解题有什么作用呢？关于这个问题，我无法像豆包那样给你一个给你最直接、最真相、最不绕弯、最扎心、最硬核、最干脆、最不墨迹、最戳痛点、最不留情面、最一针见血、最开门见山、最单刀直入、最不铺垫、最不客套、最不煽情、最不废话、最不拐弯、最不磨叽、最不装、最不端着、最不啰嗦、最不拖沓、最不委婉、最不掩饰、最不藏着掖着、最直白、最露骨、最实在的结论。
+   
+   我的理解是，对于微分方程、积分方程等，我们把求解过程想象为从树林中取木材来建造房屋，而拉氏变换相当于将这些树木裁剪为一堆积木混合堆放在一起，对应着将原函数$f(x)$转化为关于变量s的有理分式；\fbox{而后}我们需要将这些混合堆放在一起的积木分类整理好，比如立方体的归于一类、球体的归于一类、棱锥的归于一类，对应着有理分式拆分；\fbox{最后}我们将分类好的积木搭建出需要的房屋，比如哥特式建筑用棱锥积木、清真建筑用球体积木、我的世界用立方体积木,此步对应着拉式逆变换，方程得解。\textcolor{blue}{\textbf{这是此文档的核心要义，此文档全篇围绕这个主题展开}}。可能这个叙述有点抽象，相信研友们通览全篇后定能领会此段叙述的精彩之处。
+   
+   ok我们回到\hspace{0.5em}\fbox{题目}：求曲线$y=e^{-x}sinx\left(x\geqslant0\right)$与x轴之间图形的面积
+   
+   \begin{center}
+   	\begin{tikzpicture}
+   		\begin{axis}[
+   			axis lines=middle,
+   			xmin=0, xmax=22, % 保留0~6π完整范围
+   			ymin=-0.15, ymax=1.2,       % 调整y轴范围为-1到1，以显示sin(x)
+   			xtick=\empty,  % 清空所有x轴刻度（线+数字）
+   		    ytick=\empty,  % 清空所有y轴刻度（线+数字）
+   		    xlabel={\empty}, ylabel={$y$},
+   			every axis plot/.append style={thick},
+   			legend pos=north east,
+   			grid=none,
+   			trig format=rad,
+   			restrict x to domain*=0:20.7,
+   			restrict y to domain*=-0.3:1,
+   			]
+   			
+   			% 采样点增加到400，捕捉所有微小震荡
+   			\addplot[blue, very thick, samples=400, domain=0:20.7] {exp(-0.15*x) * abs(sin(x))};
+   			\addplot[red, very thick, samples=400, domain=0:20.7] {exp(-0.15*x)};
+   			% 添加黑色的y=sin(x)曲线
+   			% 		\addplot[black, samples=400, domain=0:18.84956] {sin(x)};
+   			
+   			% 更新图例，包含三条曲线
+   			\legend{$y=e^{-x}\left|sinx\right|$, $y=e^{-x}$}
+   			\node[text width=3.3cm,font=\tiny,align=center] at (11,-0.1){plot by 职业选手麻子太丑,2026.5.28};
+   		\end{axis}
+   	\end{tikzpicture}
+   \end{center}
+   
+   面积是正值，我将$y=e^{-x}sinx\left(x\geqslant0\right)$图像在x轴下方的部分翻转过来了，蓝色线条为$y=e^{-x}\left|sinx\right|$，图像沿x轴无限延伸，现在求蓝色线条与x轴围成面积，也即要求$\int_{0}^{\infty}e^{-x}\left|sinx\right|dx$的值，也即$\int_{0}^{\infty}\left|sinx\right|e^{-x}dx$
+   
+   我们现在来仔细观察拉氏变换的定义，
+   
+    \vspace{-15pt}
+   
+   \[L\left(y\right)\:\:\:=\int_{0}^{\infty}f\left(x\right)e^{-sx}dx\]
+   
+   可以看出我们要求的式子是对函数$|sinx|$的拉氏变换（这里$s=1$）
+   
+%   \vspace{-10pt}
+   
+   \begin{center}
+   	$\int_{0}^{\infty}\left|sinx\right|e^{-x}dx=\int_{0}^{\infty}\left|sinx\right|e^{-sx}dx\:\:\left(这里s=1\:\right)$
+   \end{center}
+   
+%   \vspace{-10pt}
+   
+  那么这里对函数$|sinx|$的拉氏变换有什么说法呢，介绍如下
+  
+  \fbox{结论} 对周期函数的拉氏变换--若$x>0$，$y=f(x)$以$T$为周期，且在一个周期里的积分不为0，且在一个周期上是分段连续的函数，则有
+  
+   \vspace{-10pt}
+  
+  \begin{spacing}{2.2}
+  	\begin{center}
+  		$L\left(y\right)=\dfrac{1}{1-e^{-sT}}\int_{0}^{T}f\left(x\right)e^{-sx}dx\:$
+  		
+  		\hspace{-4em} \fbox{\scriptsize 证明} \hspace{1em}	$L\left(y\right)=\int_{0}^{\infty}f\left(x\right)e^{-sx}dx\:=\int_{0}^{T}+\int_{T}^{\infty}$
+  		
+  		$\int_{T}^{\infty} f(x) e^{-sx} dx \xrightarrow{\text{令 } t=x-T} \int_{0}^{\infty} f(t+T) e^{-s(t+T)} dt =e^{-sT}\int_{0}^{\infty}f\left(x\right)e^{-sx}dx\:$
+  		
+  		\hspace{-4em} 移项 \hspace{2em} $L\left(y\right)\cdot\left(1-e^{-sT}\right)=\int_{0}^{T}f\left(x\right)e^{-sx}dx\:$
+  		
+  		\hspace{-8em} 再除过去即得 \hspace{2em} $L\left(y\right)=\dfrac{1}{1-e^{-sT}}\int_{0}^{T}f\left(x\right)e^{-sx}dx\:$
+  	\end{center}
+  \end{spacing}
+  
+  
+  ok,再回到我们的题目中，	$\int_{0}^{\infty}\left|sinx\right|e^{-x}dx=\int_{0}^{\infty}\left|sinx\right|e^{-sx}dx\:\:\left(这里s=1\:\right)$
+  
+  \vspace{10pt}
+  
+  \begin{tabular}{@{\hspace{0.2em}} >{\centering\arraybackslash}m{35mm} @{\hspace{0.2em}} >{\centering\arraybackslash}m{8cm} }
+  	
+  	$\left|sinx\right|$周期$T=\pi$
+  	
+  	& \begin{tikzpicture}
+  		\begin{axis}[
+  			axis lines=middle,
+  			xmin=0, xmax=13.7,    % 保留0~4π范围
+  			ymin=0, ymax=1.5,         % 保留原y轴范围（0~1.1）
+  			xlabel={$x$}, ylabel={\empty},
+  			ytick=\empty,  % 清空所有y轴刻度（线+数字）
+  			xlabel={\empty}, ylabel={$y$},
+  			xtick={0, 3.14159, 6.28319, 9.42478, 12.56637},
+  			xticklabels={$0$, $\pi$, $2\pi$, $3\pi$, $4\pi$},
+  			every axis plot/.append style={thick},
+  			legend pos=north east,
+  			grid=none,
+  			trig format=rad,
+  			restrict x to domain*=0:12.56637,
+  			restrict y to domain*=0:1.1,
+  			% 关键：调整坐标轴宽高比，让x轴π与y轴0.3视觉长度一致
+  			width=8cm,                % 坐标轴水平宽度（不含标签/图例）
+  			height=2.5cm,             % 坐标轴垂直高度（不含标签/图例）
+  			scale only axis,          % 确保width/height仅作用于坐标轴，不影响其他元素
+  			]
+  			
+  			% 原函数不变：y=|sinx|
+  			\addplot[blue, very thick, samples=400, domain=0:12.56637] {abs(sin(x))};
+  			
+  			% 图例保持原样式
+  			\legend{$y=|\sin x|$}
+  			
+  			% 注释位置微调，适配新高度
+  			\node[text width=3.3cm,font=\tiny,align=center] at (4.35,1.35){plot by 职业选手麻子太丑,2026.5.28};
+  			
+  		\end{axis}
+  	\end{tikzpicture}
+  \end{tabular}
+  
+  \vspace{-10pt}
+  
+  \begin{center}
+  	记$I=\int_{0}^{\infty}\left|sinx\right|e^{-sx}dx\:=\dfrac{1}{1-e^{-sT}}\int_{0}^{T}\left|sinx\right|e^{-sx}dx$
+  	
+  	\vspace{7pt}
+  	
+   \hspace{2.5em}	$=\dfrac{1}{1-e^{-sT}}\int_{0}^{T}sinx\:\cdot e^{-sx}dx\:\:\left(这里s=1,T=\pi\:\right)$
+  \end{center}
+ 
+  这里$\int_{0}^{\pi}sinx\:\cdot e^{-x}dx\:$如何计算呢，可参考以下公式（由分部积分法推导得）
+  
+  \vspace{-7pt}
+  
+  \begin{spacing}{2.2}
+  	 \begin{center}
+  		$\int e^{ax}sin\left(bx\right)dx=\dfrac{1}{a^{2}+b^{2}}\left|_{\left(e^{ax}\right)}^{\left(e^{ax}\right)^{\prime}}\:_{^{\left(sin\left(bx\right)\right)}}^{^{\left(sin\left(bx\right)\right)^{\prime}}}\right|+C$ 
+  		
+  		其中$\left(e^{ax}\right)^{\prime}$,$\left(sin\left(bx\right)\right)^{\prime}$表示求导，$\left|_{\left(e^{ax}\right)}^{\left(e^{ax}\right)^{\prime}}\:_{^{\left(sin\left(bx\right)\right)}}^{^{\left(sin\left(bx\right)\right)^{\prime}}}\right|$表示行列式
+  	\end{center}
+  \end{spacing}
+ 
+  至此我们了解到对周期函数的拉式变换这个应用。这里有同学托腮疑惑："这披着拉式变换的外衣，其本质还是变量代换嘛"。我觉得这个疑惑非常有道理。下面我们来看拉式变换在微分方程中的应用
+  
+  \textcolor{gray}{文档日志：2026.5.29在网吧配置miktex编译环境，编译tex文档失败，可能此tex中的宏包杂乱，虽然使用texlive可编译，但miktex环境却失败}
+  
+  \clearpage
+  
+  \fbox{题目} (2020·数一)设$f(x)$满足在$f^{\prime\prime}\left(x\right)+af^{\prime}\left(x\right)+f\left(x\right)=0\:\left(a>0\right)$
+  
+  \hspace{3em}$f\left(0\right)=m\:,\:f^{\prime}\left(0\right)=n\:,则\:\int_{0}^{\infty}f\left(x\right)dx=$\underline{\hbox to 20mm{}}
+   
+   \vspace{10pt}
+   
+   \fbox{解析} 常规方法由特征方程得特征根，再讨论通解的三种形式，较为麻烦.
+   
+   观察 $\int_{0}^{\infty}f\left(x\right)dx=\int_{0}^{\infty}f\left(x\right)e^{-sx}dx (这里s=0)$,也即对$f(x)$进行拉式变换，再令$s=0$得到的$L(y)$即为所求. 对式子$f^{\prime\prime}\left(x\right)+af^{\prime}\left(x\right)+f\left(x\right)=0$取拉式变换
+   
+   \vspace{-10pt}
+   
+   \begin{spacing}{2}
+   	\begin{center}
+   		$L\left(f^{\prime\prime}\left(x\right)\right)+aL\left(f^{\prime}\left(x\right)\right)+L\left(f\left(x\right)\right)=0$
+   		
+   		令$y=f(x)$,这样看舒服些\hspace{1em}$L\left(y^{\prime\prime}\right)+aL\left(y^{\prime}\right)+L\left(y\right)=0$
+   		
+   		应用拉氏变换微分性质,即
+   		
+   		$L\left(y^{\prime\prime}\right)=s^{2}L\left(y\right)-s\cdot y\left(0\right)-y^{\prime}\left(0\right)$，$L\left(y^{\prime}\right)=sL\left(y\right)-y\left(0\right)$
+   		
+   		由题条件，$y\left(0\right)=m\:,\:y^{\prime}\left(0\right)=n$ ,带入拉式变换后的式子
+   		
+   		$s^{2}L\left(y\right)-s\cdot m-n+a\left\lbrack sL\left(y\right)-m\right\rbrack+L\left(y\right)=0$
+   		
+   		令$s=0$,解得$L(y)=am+n$
+   	\end{center}
+   \end{spacing}
+   
+   
+   
+  由上述例子看出，关于积分$\int_{0}^{\infty}f\left(x\right)dx$,可以看作$\int_{0}^{\infty}f\left(x\right)e^{-sx}dx (这里s=0)$,我们将微分方程进行拉式变换后，再令s=0,解出的$L(f(x))$(或者说$L(y)$)即为所求。下面再来看一个例子。
+  
+  \vspace{10pt}
+  
+  \fbox{题目} (2016·数一)设函数$y(x)$满足方程$y^{\prime\prime}+2y^{\prime}+ky=0$,其中$0<k<1$.
+  
+  $(1)$ 证明$\int_{0}^{\infty}y\left(x\right)dx$收敛
+  
+  $(2)$若$y\left(0\right)=1\:,\:y^{\prime}\left(0\right)=1$,求$\int_{0}^{\infty}y\left(x\right)dx$值
+  
+  \vspace{10pt}
+  
+  \fbox{解析} $(1)$ 设$y\left(0\right)=C_{1}\:,\:y^{\prime}\left(0\right)=C_{2}$,对方程取拉式变换，并应用其微分性质
+  
+  \vspace{-10pt}
+  
+  \begin{spacing}{2.2}
+  	\begin{center}
+  		$s^{2}L\left(y\right)-s\cdot C_{1}-C_{2}+2\left\lbrack sL\left(y\right)-C_{1}\right\rbrack+k\cdot L\left(y\right)=0$
+  		
+  		令$s=0$,得 $L\left(y\right)=\dfrac{2C_{1}+C_{2}}{k}$,收敛
+  	\end{center}
+  \end{spacing}
+  
+  \vspace{-5pt}
+  
+  \hspace{3em}$(2)$ 代入$C_{1}=C_{2}=1$,得$L\left(y\right)=\dfrac{3}{k}$
+  
+  \clearpage
+  
+  \fbox{小结}上述几个例子是关于拉式变换应用于$\int_{0}^{\infty}f\left(x\right)dx$的简单介绍。拉式变换尤其适合应用于带初值的微分方程，也尤其适合应用于带初值的积分方程，与$\Gamma\left(\alpha\right)=\int_{0}^{\infty}x^{\alpha-1}\cdot e^{-x}dx$这样的$\Gamma$函数也有一定的形式关联。
+  
+  网上关于拉式变换解考研数学题的资料很少，涉及到的点零碎星散，并没有真正用于快速解题之中。虽然信号与系统或自动控制课程中，拉式变换解微分方程是必考重点，但网上关于此部分的教程也是形式繁杂，没有形成体系。
+  
+  对于解微分方程的痛点，经参考多方资料与实践总结，我建立了关于拉氏变换解微分方程（和积分方程）的一整套成熟的方法体系，根据实际解题需要，详细介绍了 \begin{itemize}
+  	\item 拉式变换的概念、对常见函数的拉式变换
+  	\item   拉式变换的微分性质及积分性质
+  	\item   拉式变换的位移性质和卷积公式（用于解积分方程）
+  	\item   拉式变换解微分方程的程序步骤
+  \end{itemize}
+
+尤其将微分方程进行拉式变换后，得到一个有理分式，特别地，我建立了关于有理分式拆分的一整套成熟的方法体系，详细介绍了三种拆分方法：
+
+\vspace{-10pt}
+
+\begin{center}
+	\textbullet \hspace{0.5em} 留数法  \hspace{1cm}  \textbullet \hspace{0.5em} 极限法 \hspace{1cm}  \textbullet \hspace{0.5em} 赋值法 
+\end{center}
+
+\vspace{-10pt}
+
+本文档的行文思路是，先介绍拉式变换的概念、对常见函数的拉式变换，再介绍拉式变换的微分性质，再介绍拉式变换解微分方程的步骤。将微分方程进行拉式变换后，得到一个有理分式，需对其进行拆分，故接下来介绍关于有理分式拆分的成套体系方法，涉及到其中的极限法，再介绍极限比阶里抓大头的概念。总之就是以拉式变换解微分方程（以及积分方程）为主线，涉及到相应其他需介绍的内容时，再进行专门的介绍，然后再回到主线内容的叙述中。就好像编写tex文档先编译main主文档，执行到相应内容时再加载调用相应的package包。
+
+除此之外，文档中还包含了我从几何观点对定积分、二重积分、三重积分、曲面积分的理解，对变量代换和对称性也作了讨论。
+
+本文档不仅适用于考研数学复习参考，对信号与系统、自动控制原理科目的复习也有一定的借鉴意义。
+
+ \chapter*{朋友作序}
+ \pagenumbering{roman}  
+ \section*{\textbullet \hspace{0.5em}诸葛孔明}
+ 
+ \mfMicroscope 王司徒之生平我素有所知
+ 
+ \section*{\textbullet \hspace{0.5em}司徒王朗}
+ 
+ 来者可是...诸葛孔明。司徒王朗是作者本人，也是职业选手麻子太丑，也是B站up主-qqspeed406。我已在前面作了关于文档简介的介绍。因为有这些真诚、热情的朋友，生活不再枯燥，工作中我也得到了很多帮助，支持我的想法、决定，真的非常感谢他们，我觉得这是非常幸运的事情。虽独闯天涯，但天涯有同路人，以后若真的遥距千里，也是共婵娟若比邻。
+ 
+ 现诚邀朋友们为此文档作序
+ 
+  \section*{\textbullet \hspace{0.5em}小瘦子}
+
+ 那多不好意思。  
+   
+ \section*{\textbullet \hspace{0.5em}飞天柯基} 
+   
+ 不要愤怒。愤怒，会降低你的智慧。
+ 
+ \section*{诸葛瑾-曾老师}
+ 
+ 我滴妈，这不是...哎，是我。
+ 
+ \section*{眉毛兄}
+ 
+ 我滴乖，没毛，没招了。
+ 
+ \section*{火种148}
+ 
+ 秋少又涨球了
+ 
+ \section*{萝卜}
+ 
+ d09又涨价了。
+ 
+ \section*{Mark Xu}
+ 
+ 赶快报名
+ 
+ 
+ 
+ 
+
+%-------------------------以上是本书简介--------------------------%
+   
+   
+   \clearpage % 分页，避免与目录混排
+   
+   \pagenumbering{roman} % 🔴 report类支持：页码切换为小写罗马数字（i, ii...）
+   
+   \tableofcontents % 生成目录
+   \clearpage % 分页，确保页码切换不混乱
+   
+	\pagenumbering{arabic} 
+	\setcounter{chapter}{0} 
+	\input{data/chap1} % 保留原章节引用，无冲突
+%	\input{data/chap2} % 保留原章节引用，无冲突
+%	\input{data/chap3} % 保留原章节引用，无冲突
+%	\input{data/chap4} % 保留原章节引用，无冲突
+%	\input{data/chap5} % 保留原章节引用，无冲突
+%	\input{data/chap6} % 保留原章节引用，无冲突
+%	\input{data/chap7} % 保留原章节引用，无冲突
+%	\input{data/chap8} % 保留原章节引用，无冲突
+%	\input{data/chap9} % 保留原章节引用，无冲突
+%	\input{data/chap10} % 保留原章节引用，无冲突
+	\clearpage
+	
+	\chapter*{后记}
+	\addcontentsline{toc}{chapter}{后记} % 添加到目录
+	
+	
+\end{document}

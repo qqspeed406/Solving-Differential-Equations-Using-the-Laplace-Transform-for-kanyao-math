@@ -1,0 +1,275 @@
+%\thispagestyle{fancy}
+
+%\pagecolor{gray!3}
+
+\chapter{拉式变换解微分方程}
+
+
+\section{例题讲解}\label{chapter4-litijiangjie}
+
+\subsection*{使用拉氏变换解微分方程(和积分方程)的步骤}
+
+在第二章中简介了拉氏变换解微分方程的步骤，这里再复习一下
+
+\begin{itemize}
+	\item 微分方程(或积分方程)+初始条件
+	\item 应用微分性质或积分性质，得代数方程
+	\item 应用有理分式拆分（将单独介绍）
+	\item 取拉式逆变换得解
+\end{itemize}
+
+\fbox{题目\ref{jieweifenfangcheng-1}\hspace{0.5em} (2021·张宇八套卷)}
+
+\vspace*{-10pt}
+
+\begin{equation}\label{jieweifenfangcheng-1}
+	\dfrac{d^{2}y}{dx^{2}}+\dfrac{1}{1-y}\left(\dfrac{dy}{dx}\right)^{2}=0
+\end{equation}
+
+\vspace{-40pt}
+
+\begin{gather*}
+	\text{满足条件$y(0)=0$，\hspace{0.5em} $y^{\prime}\left(0\right)=2$的特解y是\underline{\hbox to 15mm{}}}\\[10pt]
+	\text{\fbox{\scriptsize 解析}}\hspace{1em} \left(\dfrac{y^{\prime}}{1-y}\right)^{\prime}=0 ，\hspace{1em} (\dfrac{y^{\prime}}{1-y})=C，\hspace{1em} y^{\prime}+Cy=C\\[10pt]
+	\text{取拉式变换}，\hspace{1em} sL\left(y\right)+CL\left(y\right)=\dfrac{C}{s}\\[10pt]
+	L\left(y\right)=\dfrac{C}{s\left(s+C\right)}=\dfrac{-1}{s+C}+\dfrac{1}{s}，\hspace{1em} 取逆变换 \hspace{1em} y=-e^{-cx}+1\\[10pt]
+	\text{由$y^{\prime}\left(0\right)=2$}，\hspace{1em} \text{得} \hspace{1em} C=2，\hspace{1em} y=1-e^{-2x}
+\end{gather*}
+
+\clearpage
+
+\fbox{题目\ref{jieweifenfangcheng-2}\hspace{0.5em} (2021·李林模拟卷)}
+
+\vspace*{-30pt}
+
+\begin{gather*}
+	\text{设$y=y(x)$有一阶连续导数，} y\left(0\right)=1，\hspace{1em} 且满足
+\end{gather*}
+
+\vspace*{-30pt}
+
+\begin{equation}\label{jieweifenfangcheng-2}
+	y^{\prime}\left(x\right)+3\int_{0}^{x}y^{\prime}\left(t\right)dt+2x\int_{0}^{1}y\left(xu\right)du+e^{-x}=0
+\end{equation}
+
+\vspace*{-30pt}
+
+\begin{gather*}
+	\text{(1)\hspace{0.5em}求} y=y\left(x\right) \hspace{2em} \text{(2)\hspace{0.5em}求} \int_{0}^{+\infty}y\left(x\right)dx\\[15pt]
+	\text{\fbox{\scriptsize 解析}}\hspace{0.2em} (1) \hspace{0.5em} y^{\prime}\left(x\right)+3\int_{0}^{x}y^{\prime}\left(t\right)dt+2x\dfrac{\int_{0}^{x}y\left(t\right)dt}{x}+e^{-x}=0\\[10pt]
+	\text{求导} \hspace{1em} y^{\prime\prime}+3y^{\prime}+2y=e^{-x}，\hspace{1em} y\left(0\right)=1，\hspace{1em} y^{\prime}\left(0\right)=-1\\[10pt]
+	\text{取拉氏变换} \hspace{1em} s^{2}L\left(y\right)-s+1+3\cdot\left\lbrack sL\left(y\right)-1\right\rbrack+2L\left(y\right)=\dfrac{1}{s+1}\hspace{-2.3em}\tag{4.2.1}\\[10pt]
+	\text{移项} \hspace{1em} L\left(y\right)=\dfrac{1}{\left(s+1\right)^{2}\cdot\left(s+2\right)}+\dfrac{s+2}{\left(s+1\right)\left(s+2\right)}\\[10pt]
+	\text{拆分} \hspace{1em} \dfrac{1}{\left(s+1\right)^{2}\cdot\left(s+2\right)}=\dfrac{A}{s+2}+\dfrac{B}{\left(s+1\right)^{2}}+\dfrac{C}{s+1}\\[10pt]
+	A=\left. \dfrac{1}{\left(s+1\right)^{2}} \right|_{\vphantom{\dfrac{1}{1}} s=-2}=1,\quad B=\left. \dfrac{1}{s+2} \right|_{\vphantom{\dfrac{1}{1}} s=-1}=1 \\[10pt]
+	\text{对分式两边同乘$x$,取$x\to\infty$极限} \\[10pt]
+	0=A+0+C，\hspace{1em} C=-1 \\[10pt]
+	\text{故}\hspace{1em} L\left(y\right)=\dfrac{1}{s+2}+\dfrac{1}{\left(s+1\right)^{2}}+\dfrac{-1}{s+1}+\dfrac{1}{s+1} \\[10pt]
+	\text{取拉式逆变换} \hspace{1em} y=e^{-2x}+x\cdot e^{-x}\\[10pt]
+	\text{(2)\hspace{0.5em}在(4.2.1)式中，令$s=0$，得 \hspace{0.5em} $L\left(y\right)=\dfrac{3}{2}$}
+\end{gather*}
+
+\clearpage
+
+\fbox{题目\ref{jieweifenfangcheng-3}\hspace{0.5em} (2013·数一)}
+
+\vspace*{-40pt}
+
+\begin{gather*}
+	\text{设数列} \left\lbrace a_{n}\right\rbrace \text{满足条件}
+\end{gather*}
+
+\vspace*{-40pt}
+
+\begin{equation}\label{jieweifenfangcheng-3}
+	a_{0}=3，\hspace{1em} a_{1}=1，\hspace{1em} a_{n-2}-n\left(n-1\right)\cdot a_{n}=0\:\left(n\geqslant2\right)
+\end{equation}
+
+\vspace*{-45pt}
+
+\begin{gather*}
+	S\left(x\right)\text{是幂函数}\sum\limits_{n=0}^{\infty}a_{n}x^{n}\text{的和函数}\\[5pt]
+	\text{(1)证明}S^{\prime\prime}\left(x\right)-S\left(x\right)=0 \hspace{2em} \text{(2)求$S\left(x\right)$}的表达式\\[5pt]
+	\text{\fbox{\scriptsize 解析}\hspace{0.5em}(1)略}\\[5pt]
+	\text{(2)} \hspace{1em} S\left(0\right)=3，\hspace{1em} S^{\prime}\left(0\right)=1\\[5pt]
+	\text{对式子}\hspace{0.5em} S^{\prime\prime}\left(x\right)-S\left(x\right)=0 \hspace{0.5em} 取拉氏变换\\[5pt]
+	s^{2}\cdot L\left\lbrack S\left(x\right)\right\rbrack-3s-1-L\left\lbrack S\left(x\right)\right\rbrack=0\\[5pt]
+	L\left\lbrack S\left(x\right)\right\rbrack=\dfrac{3s+1}{\left(s+1\right)\left(s-1\right)}=\dfrac{1}{s+1}+\dfrac{2}{s-1}\\[5pt]
+	\text{取拉式逆变换}\hspace{1em}S\left(x\right)=e^{-x}+2e^{x}
+\end{gather*}
+
+\fbox{题目\ref{jieweifenfangcheng-4}\hspace{0.5em} (2013·数一)}
+
+\vspace*{-15pt}
+
+\begin{equation}\label{jieweifenfangcheng-4}
+	\text{设奇函数$f(x)$在$\left\lbrack-1,1\right\rbrack$上具有二阶导数，且$f\left(1\right)=1$}
+\end{equation}
+
+\vspace*{-50pt}
+
+\begin{gather*}
+	\text{证明:\hspace{0.5em}(1)略\hspace{1em} (2)存在$\eta\in\left(-1,1\right)$，使得$f^{\prime\prime}\left(\eta\right)+f^{\prime}\left(\eta\right)=1$}\\
+	\text{\fbox{\scriptsize 解析}\hspace{0.5em} 参考书中构造函数的解法，它直接就扔出个构造函数$G\left(x\right)=e^{x}\left(f^{\prime}\left(x\right)-1\right)$}\\
+	\text{让人摸不着头脑，不知道它是从哪里冒出来的。现在我来为你解密}\\
+	\text{把$\eta$改为$x$，}\hspace{1em}f^{\prime\prime}\left(x\right)+f^{\prime}\left(x\right)=1，\hspace{1em} \text{设}f^{\prime}\left(0\right)=C_1\\[5pt] 
+	\text{取拉氏变换}\hspace{1em} s\cdot L\left\lbrack f^{\prime}\left(x\right)\right\rbrack-C_{1}+L\left\lbrack f^{\prime}\left(x\right)\right\rbrack=\dfrac{1}{s}\\[5pt]
+	L\left\lbrack f^{\prime}\left(x\right)\right\rbrack=\dfrac{1}{s\left(s+1\right)}+\dfrac{C_{1}}{s+1}=\dfrac{1}{s}+\dfrac{C}{s+1}\\[5pt]
+	\text{取拉式逆变换}\hspace{1em} f^{\prime}\left(x\right)=1+Ce^{-x}，\hspace{1em} \left\lbrack f^{\prime}\left(x\right)-1\right\rbrack e^{x}=C \\[5pt]
+	\text{这个函数就这样构造出来了.它是解出来的，不是灵光乍现拍脑袋的}
+\end{gather*}
+
+\clearpage
+
+\fbox{题目\ref{jieweifenfangcheng-5}\hspace{0.5em} (2014·数一)}
+
+%\vspace{-10pt}
+
+\begin{center}
+	设函数$f(x)$具有二阶连续导数，$z=f\left(e^{x}\cdot cosy\right)$\hspace{0.5em}满足
+\end{center}
+
+\vspace*{-15pt}
+
+\begin{equation}\label{jieweifenfangcheng-5}
+	\frac{\partial^{2}z}{\partial x^{2}}+\frac{\partial^{2}z}{\partial y^{2}}=\left(4z+e^{x}\cdot cosy\right)e^{2x}
+\end{equation}
+
+\vspace*{-35pt}
+
+\begin{gather*}
+	\text{若\hspace{0.5em}$f\left(0\right)=0\:,f^{\prime}\left(0\right)=0$，求$f(u)$的表达式}\\[10pt]
+	\text{\fbox{\scriptsize 解析} \hspace{1em} 经化简}\hspace{1em} f^{\prime\prime}-4f=u \\[10pt]
+	\text{取拉氏变换} \hspace{1em} s^{2}\cdot L\left(f\right)-4L\left(f\right)=\dfrac{1}{s^{2}} \\[10pt]
+	\text{移项} \hspace{1em} L\left(f\right)=\dfrac{1}{s^{2}\left(s+2\right)\left(s-2\right)}\\[15pt]
+	\text{拆分} \hspace{1em} \dfrac{1}{s^{2}\left(s+2\right)\left(s-2\right)}=\dfrac{A}{s+2}+\dfrac{B}{s-2}+\dfrac{C}{s^{2}}+\dfrac{D}{s}\\[15pt]
+	\hspace{2em} A=\left. \dfrac{1}{s^{2}\left(s-2\right)} \right|_{\vphantom{\dfrac{1}{1}} s=-2}=-\dfrac{1}{16},\quad B=\left. \dfrac{1}{s^{2}\left(s+2\right)} \right|_{\vphantom{\dfrac{1}{1}} s=2}=\dfrac{1}{16}\\[15pt]
+	\text{\text{对分式两边同乘$s$,取$s\to\infty$极限}}，\hspace{1em} D=0\\[15pt]
+	C=\left. \dfrac{1}{\left(s+2\right)\left(s-2\right)} \right|_{\vphantom{\dfrac{1}{1}} s=0}=-\dfrac{1}{4}\\[10pt]
+	\text{故} \hspace{1em} L\left(y\right)=\dfrac{1}{s^{2}\left(s+2\right)\left(s-2\right)}=\dfrac{-\tfrac{1}{16}}{s+2}+\dfrac{\tfrac{1}{16}}{s-2}+\dfrac{-\dfrac{1}{4}}{s^{2}}\\[20pt]
+	\text{取拉式逆变换} \hspace{1em} f\left(u\right)=-\dfrac{1}{16}e^{-2u}+\dfrac{1}{16}e^{2u}-\dfrac{1}{4}u	
+\end{gather*}
+
+
+\clearpage
+
+\fbox{题目\ref{jieweifenfangcheng-6}}
+
+\vspace*{-15pt}
+
+\begin{equation}\label{jieweifenfangcheng-6}
+	\text{求级数}\sum\limits_{n=0}^{\infty}\dfrac{x^{4n}}{\left(4n\right)!}\text{的和函数}S\left(x\right)
+\end{equation}
+
+\vspace*{-25pt}
+
+\begin{gather*}
+	\text{\fbox{\scriptsize 解析}}\hspace{1em} \sum\limits_{n=0}^{\infty}\dfrac{x^{4n}}{\left(4n\right)!}=1+\dfrac{x^{4}}{4!}+\dfrac{x^{8}}{8!}+......\\[15pt]
+	S^{\left(4\right)}\left(x\right)=S\left(x\right)，\hspace{1em} S\left(0\right)=1，\hspace{1em} S^{\prime}\left(0\right)=S^{\prime\prime}\left(0\right)=S^{\prime\prime\prime}\left(0\right)=0\\[15pt] 
+	\text{对上式取拉氏变换}\hspace{1em} s^{4}\cdot L\left\lbrack S\left(x\right)\right\rbrack-s^{3}-L\left\lbrack S\left(x\right)\right\rbrack=0\\[20pt]
+	\text{移项}\hspace{1em} L\left\lbrack S\left(x\right)\right\rbrack=\dfrac{s^{3}}{\left(s^{2}+1\right)\left(s+1\right)\left(s-1\right)}=\dfrac{A}{s+1}+\dfrac{B}{s-1}+\dfrac{Cs+D}{s^{2}+1}\\[20pt]
+	A=\left. \dfrac{s^{3}}{\left(s^{2}+1\right)\left(s-1\right)} \right|_{\vphantom{\dfrac11} s=-1}=\dfrac14,\quad B=\left. \dfrac{s^{3}}{\left(s^{2}+1\right)\left(s+1\right)} \right|_{\vphantom{\dfrac11} s=1}=\dfrac14\\[20pt]	
+	\text{对分式两边同乘$s$,取$s\to\infty$极限}\hspace{1em}，\hspace{1em} 1=A+B+C，\hspace{1em} C=\dfrac{1}{2}\\[15pt]
+	\text{分式两边令$s=0$，}\hspace{1em} 0=A-B+D，\hspace{1em} D=0\\[20pt]
+	L\left\lbrack S\left(x\right)\right\rbrack=\dfrac{\tfrac{1}{4}}{s+1}+\dfrac{\tfrac{1}{4}}{s-1}+\dfrac{\tfrac{1}{2}s}{s^{2}+1}\\[20pt]
+	\text{取拉式逆变换}，\hspace{1em} S\left(x\right)=\dfrac{1}{4}e^{-x}+\dfrac{1}{4}e^{x}+\dfrac{1}{2}cosx
+\end{gather*}
+
+\clearpage
+
+\fbox{题目\ref{jieweifenfangcheng-7}\hspace{0.5em} (2009·数一)}
+
+\vspace*{-35pt}
+
+\begin{equation}\label{jieweifenfangcheng-7}
+	y^{\prime\prime}-2y^{\prime}+y=x \hspace{0.5em}\text{满足条件}\hspace{1em} y\left(0\right)=2，\hspace{0.5em} y^{\prime}\left(0\right)=0 \hspace{0.5em}\text{的解为}\underline{\hbox to 15mm{}}
+\end{equation}
+
+\vspace{-50pt}
+
+\begin{gather*}
+	\text{\fbox{\scriptsize 解析}}\hspace{1em} \text{取拉式变换}，\hspace{1em} s^{2}\cdot L\left(y\right)-2s-2\left\lbrack s\cdot L\left(y\right)-2\right\rbrack+L\left(y\right)=\dfrac{1}{s^{2}}\\[10pt]
+	L\left(y\right)=\dfrac{1}{s^{2}\left(s-1\right)^{2}}+\dfrac{2s-4}{\left(s-1\right)^{2}}=\dfrac{f}{s^{2}}+\dfrac{A}{\left(s-1\right)^{2}}+\dfrac{B}{s-1}+\dfrac{2\left(s-1\right)-2}{\left(s-1\right)^{2}}\\[10pt]
+	f=\left. \dfrac{1}{\left(s-1\right)^{2}} \right|_{\vphantom{\dfrac11} s^{2}=0}
+	=\left. \dfrac{1}{s^{2}-2s+1} \right|_{\vphantom{\dfrac11} s^{2}=0}
+	=\left. \dfrac{1+2s}{\left(1-2s\right)\cdot\left(1+2s\right)} \right|_{\vphantom{\dfrac11} s^{2}=0}=1+2s\\[10pt]
+	A=\left. \dfrac{1}{s^{2}} \right|_{\vphantom{\dfrac{1}{1}} s=1}=1\\[10pt]
+	\text{对}\hspace{1em}\dfrac{1}{s^{2}\left(s-1\right)^{2}}=\dfrac{f}{s^{2}}+\dfrac{A}{\left(s-1\right)^{2}}+\dfrac{B}{s-1},\hspace{0.5em} \text{两边同乘$s$,取$s\to\infty$极限}\\[10pt]
+	0=2+0+B，\hspace{1em} B=-2 \\[10pt]
+	L\left(y\right)=\dfrac{f}{s^{2}}+\dfrac{A}{\left(s-1\right)^{2}}+\dfrac{B}{s-1}+\dfrac{2\left(s-1\right)-2}{\left(s-1\right)^{2}}=\dfrac{1}{s^{2}}+\dfrac{2}{s}-\dfrac{1}{\left(s-1\right)^{2}}\\[10pt]
+	\text{取拉式逆变换}，\hspace{1em} y=x+2-xe^{x}
+\end{gather*}
+
+\section{位移定理(位移性质)}
+
+表格\ref{tab:changjianhanshu-laplas}常见函数的拉氏变换速查表中,进行了关于位移定理的简单介绍。\ref{chapter4-litijiangjie}节的例题中也涉及到类似$xe^{x}$的变换。现在对位移定理进行证明
+
+%\vspace{5pt}
+
+\fbox{位移定理(性质)}\hspace{1em} 设$F\left(s\right)=L\left\lbrack f\left(x\right)\right\rbrack$，则 \hspace{0.5em} $L\left\lbrack e^{ax}f\left(x\right)\right\rbrack=F\left(s-a\right)$
+
+\vspace{-35pt}
+
+\begin{gather*}
+	\text{\fbox{\scriptsize 证明}} \hspace{1em} L\left\lbrack e^{ax}f\left(x\right)\right\rbrack=\int_{0}^{\infty}e^{ax}f\left(x\right)\cdot e^{-sx}dx=\int_{0}^{\infty}f\left(x\right)\cdot e^{-\left(s-a\right)x}dx=F\left(s-a\right)\\[10pt]
+	\text{常见形式有}\hspace{1em} L\left(e^{ax}\right)=\dfrac{1}{s-a}，\hspace{1em} L\left(x^{n}\cdot e^{ax}\right)=\dfrac{n!}{\left(s-a\right)^{n+1}}\\[10pt]
+	L\left(sinx\cdot e^{ax}\right)=\dfrac{1}{\left(s-a\right)^{2}+1}，\hspace{1em} L\left(cosx\cdot e^{ax}\right)=\dfrac{s-a}{\left(s-a\right)^{2}+1}\:
+\end{gather*} 
+
+
+\fbox{题目\ref{jieweifenfangcheng-8}\hspace{0.5em} (2005·数一)}
+
+\vspace*{-20pt}
+
+\begin{equation}\label{jieweifenfangcheng-8}
+	\text{微分方程}\hspace{1em} xy^{\prime}+2y=xInx \hspace{1em} \text{满足} \hspace{0.5em} y\left(1\right)=-\dfrac{1}{9} \hspace{0.5em}\text{的解为}\underline{\hbox to 15mm{}}
+\end{equation}
+
+\vspace{-50pt}
+
+\begin{gather*}
+	\text{\fbox{\scriptsize 解析}} \hspace{1em} \text{令}\hspace{0.5em}t=Inx，\hspace{0.5em} \text{转化为}\hspace{1em} y^{\prime}+2y=t\cdot et\:，\hspace{1em} y\left(0\right)=-\dfrac{1}{9}\\[5pt]
+	\text{取拉氏变换}\hspace{1em} sL\left(y\right)+\dfrac{1}{9}+2L\left(y\right)=\dfrac{1}{\left(s-1\right)^{2}}\\[10pt]
+	L\left(y\right)=\dfrac{1}{\left(s-1\right)^{2}\left(s+2\right)}-\dfrac{\tfrac{1}{9}}{s+2}\\[10pt]
+	\text{拆分}\hspace{1em} \dfrac{1}{\left(s-1\right)^{2}\left(s+2\right)}=\dfrac{A}{s+2}+\dfrac{B}{\left(s-1\right)^{2}}+\dfrac{C}{s-1}\\[10pt]
+	A=\left. \dfrac{1}{\left(s-1\right)^{2}} \right|_{\vphantom{\dfrac11} s=-2}=\dfrac19,\quad B=\left. \dfrac{1}{s+2} \right|_{\vphantom{\dfrac11} s=1}=\dfrac13\\[0pt]
+	\text{对分式两边同乘$s$,取$s\to\infty$极限}\hspace{1em}0=A+0+C，\hspace{1em}C=-\dfrac{1}{9}\\[10pt]
+	\text{带入}\hspace{1em} L\left(y\right)=\dfrac{\tfrac{1}{9}}{s+2}+\dfrac{\tfrac{1}{3}}{\left(s-1\right)^{2}}+\dfrac{-\tfrac{1}{9}}{s-1}-\dfrac{\tfrac{1}{9}}{s+2}=\dfrac{\tfrac{1}{3}}{\left(s-1\right)^{2}}+\dfrac{-\tfrac{1}{9}}{s-1}\\[5pt]
+	\text{取拉式逆变换}\hspace{1em} y=\dfrac{1}{3}t\cdot e^{t}-\dfrac{1}{9}e^{t} ,\hspace{1em}\text{注意到}\hspace{0.5em}t=Inx
+\end{gather*}
+
+\vspace{-10pt}	 
+
+\fbox{题目\ref{jieweifenfangcheng-9}\hspace{0.5em}}
+
+\vspace*{-40pt}
+
+\begin{equation}\label{jieweifenfangcheng-9}
+    y^{\prime\prime}+y^{\prime}-2y=\left(6x+2\right)e^{x}\hspace{0.5em}\text{满足}\hspace{0.5em}y\left(0\right)=3，\hspace{0.5em}y^{\prime}\left(0\right)=0\hspace{0.3em}\text{的特解}\hspace{0.5em}y^{*}=\underline{\hbox to 10mm{}}
+\end{equation}
+
+\vspace*{-50pt}
+
+\begin{gather*}
+	\text{\fbox{\scriptsize 解析}}\hspace{1em}\text{取拉氏变换}\hspace{1em} s^{2}L\left(y\right)-3s+sL\left(y\right)-3-2L\left(y\right)=6\cdot\dfrac{1}{\left(s-1\right)^{2}}+2\cdot\dfrac{1}{s-1}
+\end{gather*}
+
+\vspace*{-45pt}
+
+\begin{align*}
+	L\left(y\right)&=\dfrac{6}{\left(s-1\right)^{3}\left(s+2\right)}+\dfrac{2}{\left(s-1\right)^{2}\left(s+2\right)}+\dfrac{3s+3}{\left(s-1\right)\left(s+2\right)}\\[15pt]
+	&=\dfrac{6+2s-2}{\left(s-1\right)^{3}\left(s+2\right)}+\dfrac{3s+3}{\left(s-1\right)\left(s+2\right)}\\[10pt]
+	&=\dfrac{2}{\left(s-1\right)^{3}}+\dfrac{2}{s-1}+\dfrac{1}{s+2}
+\end{align*}
+
+\vspace*{-50pt}
+
+\begin{gather*}
+\hspace{-7em}\text{取拉氏逆变换}\hspace{1em} y=x^{2}\cdot e^{x}+2e^{x}+e^{-2x}
+\end{gather*}
+
+\vspace*{-15pt}
+
+\fbox{\scriptsize 点评}\hspace{1em}此题看起来唬人，其实简单。化简后都不用怎么拆分，就得出答案了
+
+

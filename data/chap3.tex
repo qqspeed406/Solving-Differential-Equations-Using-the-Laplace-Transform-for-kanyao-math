@@ -1,0 +1,317 @@
+%\thispagestyle{fancy}
+%\pagecolor{gray!3}
+
+\chapter{有理分式拆分}
+
+这里有理分式拆分是拉式变换解微分方程(和积分方程的核心步骤)。虽然用待定系数法也能够将各分式系数解出，但不够快。
+
+\begin{center}
+	有理分式常见形式：\hspace{1em}  $\dfrac{f}{P\cdot Q}\:$ 
+	
+	\vspace{10pt}
+	
+	$f、P、Q$是关于$x$的多项式函数，通常为$ax^{2}+bx+c$形式
+\end{center}
+
+\section{留数法}
+
+\fbox{概念} \hspace{0.5em} 若有真分式$\dfrac{f}{P\cdot Q}\:\:$，$f$是关于$x$的多项式函数，$P$、$Q$均为二次式$ax^{2}+bx+c$\hspace{0.5em}($a$可为0)
+
+\vspace{-8pt}
+
+\begin{center}
+	有 \hspace{2em} $\dfrac{f}{P\cdot Q}=\dfrac{f_{1}}{P}+\dfrac{f_{2}}{Q}\:$
+	
+	\vspace{10pt}
+	
+	其中 \hspace{2em} $f_{1}=\left. \dfrac{f}{Q} \right|_{P=0} , \hspace{0.5em} f_{2}=\left. \dfrac{f}{P} \right|_{Q=0}$
+\end{center}
+
+留数是复变函数里的概念，留数（Residue）是复变函数沿包围孤立奇点的正向简单闭曲线积分值除以$2\pi i$的数值，等于函数在该奇点的洛朗展开式中负一次幂项的系数。
+
+初看这个概念可能三桶托腮"这是个啥嘞"，不用担心，其实我也看不懂.计算形式如上式所示，直接使用即可
+
+此法优点\hspace{2em}  \textbullet \hspace{0.5em} 普适 \hspace{1em}  \textbullet \hspace{0.5em} 无需知晓拆分形式
+
+此法缺点\hspace{2em}  \textbullet \hspace{0.5em} 对重根情况作用有限 \hspace{1em}  \textbullet \hspace{0.5em} 分母为二次式相乘时计算麻烦
+
+留数法通常和极限法、赋值法同时搭配使用
+
+以下题目开始添加标签编号，便于引用
+
+\clearpage
+
+
+\fbox{题目\ref{liushufa-1}} 
+\begin{equation}\label{liushufa-1}
+	\dfrac{1}{x\left(x+1\right)}=\dfrac{f_{1}}{x}+\dfrac{f_{2}}{\left(x+1\right)}
+\end{equation}
+
+\begin{center}
+	$f_{1}=\left. \dfrac{1}{x+1} \right|_{x=0} \hspace{0.5em} , \hspace{1em} f_{2}=\left. \dfrac{1}{x} \right|_{x=-1}$
+\end{center}
+
+\fbox{题目\ref{liushufa-2}}
+\begin{equation}\label{liushufa-2}
+	\dfrac{5x^{2}-6x+1}{x\left(x-2\right)\left(x-3\right)}=\dfrac{\tfrac{1}{6}}{x}+\dfrac{-\tfrac{9}{2}}{x-2}+\dfrac{\tfrac{28}{3}}{x-3}
+\end{equation}  
+
+\fbox{题目\ref{liushufa-3}}
+\begin{equation}\label{liushufa-3}
+	\dfrac{7x+6}{\left(x+1\right)\left(x+2\right)}=\dfrac{-1}{x+1}+\dfrac{8}{x+2}
+\end{equation}  
+
+\fbox{题目\ref{liushufa-4}}
+\begin{equation}\label{liushufa-4}
+	\dfrac{4x^{2}-6x-1}{\left(x+1\right)\left(2x-1\right)^{2}}=\dfrac{1}{x+1}+\dfrac{f}{\left(2x-1\right)^{2}}
+\end{equation} 
+
+\vspace{-30pt}
+
+\[
+f=\left. \dfrac{4x^{2}-6x-1}{x+1} \right|_{\vphantom{\dfrac{1}{1}}\left(2x-1\right)^{2}=0} 
+=\dfrac{\left(4x^{2}-4x+1\right)-2x-2}{x+1}
+=\dfrac{0-2x-2}{x+1}=-2
+\]
+
+\vspace{-10pt}
+
+如式子\ref{liushufa-4}所示，$\dfrac{1}{x+1}$系数是由下式得来的，$\left. \dfrac{4x^{2}-6x-1}{\left(2x-1\right)^{2}} \right|_{\vphantom{\dfrac{1}{1}} x=-1}$
+
+对于分子式$f$求解中，将$4x^{2}-4x+1$整体作为0处理
+
+
+
+\fbox{题目\ref{liushufa-5} (2019·数二)}
+\begin{equation}\label{liushufa-5}
+	\int\dfrac{3x+6}{\left(x-1\right)^{2}\left(x^{2}+x+1\right)}dx=\int\dfrac{f_{1}}{x^{2}+x+1}dx+\int\dfrac{f_{2}}{\left(x-1\right)^{2}}dx
+\end{equation} 
+
+\vspace{-40pt}
+
+\begin{align*}
+	f_{1}&=\left. \dfrac{3x+6}{(x-1)^2} \right|_{\vphantom{\dfrac{1}{1}} x^{2}+x+1=0} = \dfrac{3x+6}{(x^{2}+x+1)-3x} = -\dfrac{x+2}{x} \\[5pt]
+	&=-\dfrac{\left(x+2\right)\left(x+1\right)}{x\left(x+1\right)}=-\dfrac{\left(x^{2}+x+1\right)+2x+1}{\left(x^{2}+x+1\right)-1}=2x+1
+\end{align*}
+
+\vspace{-40pt}
+
+\begin{align*}
+	f_{2}&=\left. \dfrac{3x+6}{x^{2}+x+1} \right|_{\vphantom{\dfrac{1}{1}} \left(x-1\right)^{2}=0} = \dfrac{3x+6}{\left(x^{2}-2x+1\right)+3x} = \dfrac{x+2}{x} \\[10pt]
+	&=\dfrac{\left(x+2\right)\left(x-2\right)}{x\left(x-2\right)}=\dfrac{\left(x^{2}-2x+1\right)+2x-5}{\left(x^{2}-2x+1\right)-1}=-2x+5
+\end{align*}
+
+上述解析中，关于$\dfrac{f_{1}}{x^{2}+x+1}$这类分母二次式无实根的情况用留数法较为合适，而$\dfrac{f_{2}}{\left(x-1\right)^{2}}$这类分母带有重根的情况使用留数法也可以解，但总归是略显繁琐，推荐使用极限法结合赋值法
+
+\section{关于有理分式拆分中-极限法的介绍}
+这里极限法的使用方式为，将两边同时乘上$x$再取$x\rightarrow+\infty\:$即得。由于两边分母关于$x$的阶数不同，得到的结果也不同。这种极限法也称作为“抓大头法”
+
+\fbox{抓大头定义}\hspace{0.5em} 若$f(x)$、$g(x)$均$x\rightarrow+\infty$，且为关于$x$的多项式，则
+
+\vspace{-10pt}
+
+\[lim\dfrac{f}{g}=\dfrac{f中x的最高次项}{g中x的最高次项}\:,\:\:老大：x^{n}\]
+
+\fbox{题目\ref{liushufa-6}}
+\vspace*{-5pt}
+\begin{equation}\label{liushufa-6}
+	\lim\limits_{x\to\infty}\dfrac{In\left(100x^{50}-2x^{2}+5\right)}{In\left(2x^{10}+x^{3}+1\right)}=\lim\limits_{x\to\infty}\dfrac{In\left(100x^{50}\right)}{In\left(2x^{10}\right)}=\lim\limits_{x\to\infty}\dfrac{\left(In100\right)+50Inx}{\left(In2\right)+10Inx}=5
+\end{equation} 
+
+\fbox{题目\ref{liushufa-7}}
+\vspace*{-5pt}
+\begin{equation}\label{liushufa-7}
+	\lim\limits_{x\to\infty}\left(\sqrt{x+\sqrt{x+\sqrt{x}}}\:-\sqrt{x}\right)=\lim\limits_{x\to\infty}\dfrac{\sqrt{x+\sqrt{x}}}{\sqrt{x+\sqrt{x+\sqrt{x}}}\:+\sqrt{x}}=\lim\limits_{x\to\infty}\dfrac{\sqrt{x}}{\sqrt{x}\:+\sqrt{x}}=\dfrac{1}{2}
+\end{equation} 
+
+\fbox{题目\ref{liushufa-8}}
+\vspace*{-10pt}
+\begin{equation}\label{liushufa-8}
+	\lim\limits_{x\to\infty}\left\lbrack2x-\sqrt{x^{2}-1}-\left(ax+b\right)\right\rbrack=0\:,\:\left(x>0\right),试确定常数a,b
+\end{equation}
+
+
+
+\begin{center}
+	\vspace{-10pt}
+	
+	\fbox{\scriptsize 解析} \hspace{1em}	$\lim\limits_{x\to\infty}2x-x-\left(ax+b\right)=0$,$a=1,b=0$
+\end{center}
+
+通过以上三个例子的示例，我们看到抓大头法要关注$x$的最高次项，也即抓主要决定因素，忽略次要因素。当$\lim\limits_{x\to\infty}$,若分子阶数比分母阶数少，则分式值为0；若分子阶数和分母阶数相同，则分式值为常数
+
+\section{极限法(抓大头)+赋值法}
+
+\fbox{极限法} \hspace{0.5em} 式子两边同乘$x$,取$x\rightarrow\infty$的极限
+
+\vspace{5pt}
+
+\fbox{赋值法} \hspace{0.5em} 常赋0，1，-1
+
+\vspace{5pt}
+
+\fbox{需知} \hspace{0.5em} 使用此法时，需知拆分形式
+
+\subsection{拆分原则}
+
+\begin{itemize}
+	\item 分子比分母少一次
+	\item 有重根的形式都一样(以最低次为准)
+\end{itemize}
+
+如题目\ref{liushufa-4}
+
+\vspace{-20pt}
+
+\[\dfrac{4x^{2}-6x-1}{\left(x+1\right)\left(2x-1\right)^{2}}=\dfrac{f}{x+1}+\dfrac{A}{\left(2x-1\right)^{2}}+\dfrac{B}{2x-1}\]
+
+如题目\ref{liushufa-5}
+
+\vspace{-20pt}
+
+\[\dfrac{3x+6}{\left(x-1\right)^{2}\left(x^{2}+x+1\right)}=\dfrac{f}{x^{2}+x+1}+\dfrac{B}{\left(x-1\right)^{2}}+\dfrac{A}{x-1}\]
+
+\section{各种拆分类型-例题讲解}
+
+有理分式 $\dfrac{f}{P\cdot Q}$\hspace{0.2em}, \hspace{0.5em} $f,P,Q$均为关于$x$的多项式
+
+\subsection{若$P,Q$为一次式$ax+b$且$\dfrac{f}{P\cdot Q}$}
+
+\begin{center}
+	$\dfrac{f}{P\cdot Q}=\dfrac{f_{1}}{P}+\dfrac{f_{2}}{Q}$\hspace{0.3em},\hspace{1em}$f_1,f_2$用留数法,如\hspace{0.5em}\fbox{题目}\hspace{0.5em} \ref{liushufa-1}、\ref{liushufa-2}、\ref{liushufa-3}
+\end{center}
+
+\subsection{若$P,Q$为一次式$ax+b$且$\dfrac{f}{P\cdot Q^2}$}
+
+\vspace{10pt}
+
+\begin{center}
+	$\dfrac{f}{P\cdot Q^{2}}=\dfrac{f_{1}}{P}+\dfrac{A}{Q^{2}}+\dfrac{B}{Q}$
+\end{center}
+
+\clearpage
+
+\begin{itemize}
+	\item $f_1$用留数法(条件：$P=0$),即$f_{1}=\left. \dfrac{f}{Q^{2}} \right|_{\vphantom{\dfrac{1}{1}} p=0}$
+	\item $A$用留数法或赋值法(条件：$Q=0$),即$A=\left. \dfrac{f}{P} \right|_{\vphantom{\dfrac{1}{1}} Q=0}$
+	\item $B$用极限法或赋值法
+\end{itemize}
+
+\fbox{题目\ref{liushufa-9}也即\ref{liushufa-4}}
+\begin{equation}\label{liushufa-9}
+	\dfrac{4x^{2}-6x-1}{\left(x+1\right)\left(2x-1\right)^{2}}=\dfrac{f_{1}}{x+1}+\dfrac{A}{\left(2x-1\right)^{2}}+\dfrac{B}{2x-1}
+\end{equation}
+
+\vspace{-40pt}
+
+\begin{gather*}
+	\text{\fbox{\scriptsize 解析}} \hspace{1em} f_{1}=\left. \dfrac{4x^{2}-6x-1}{\left(2x-1\right)^{2}} \right|_{\vphantom{\dfrac{1}{1}} x=-1}=1 \\
+	\text{两边同乘$x$,取$x\to\infty$极限，抓大头} \\
+	\text{即}\dfrac{4}{4}=f_{1}+0+\dfrac{B}{2},\quad B=0 \\
+	\text{等式两边令$x=0$},\quad -1=1+A+0,\quad A=-2
+\end{gather*}
+
+\vspace{-10pt}
+
+\fbox{题目\ref{liushufa-10}}
+
+\vspace*{-15pt}
+
+\begin{equation}\label{liushufa-10}
+	\dfrac{x^{2}+1}{\left(x+1\right)^{2}\left(x-1\right)}=\dfrac{f}{x-1}+\dfrac{A}{\left(x+1\right)^{2}}+\dfrac{B}{x+1}
+\end{equation}
+
+\vspace{-30pt}
+
+\begin{gather*}
+	f=\left. \dfrac{x^{2}+1}{\left(x+1\right)^{2}} \right|_{\vphantom{\dfrac{1}{1}} x=1}=\dfrac{1}{2},\quad A=\left. \dfrac{x^{2}+1}{x-1} \right|_{\vphantom{\dfrac{1}{1}} x=-1}=-1 \\
+	\text{两边同乘$x$,取$x\to\infty$极限，抓大头} \\
+	1=f+0+B,\quad B=\dfrac{1}{2}
+\end{gather*}
+
+\subsection{若$P$为一次式、$Q$为二次式($\Delta<0$)且$\dfrac{f}{P\cdot Q}$}\label{liushufa-yicifang-erci}
+
+\vspace{-30pt}
+
+\begin{gather*}
+	\dfrac{f}{P\cdot Q}=\dfrac{f_{1}}{P}+\dfrac{Ax+B}{Q}\\
+	\text{$f_1$:\hspace{0.3em}留数法，\hspace{1em}$A$:\hspace{0.3em}极限法，\hspace{1em} $B$:\hspace{0.3em}赋值法}
+\end{gather*}
+
+\clearpage
+
+\fbox{题目\ref{liushufa-11}}
+
+\vspace*{-15pt}
+
+\begin{equation}\label{liushufa-11}
+	\dfrac{2x^{2}-x-1}{\left(x+1\right)\left(x^{2}+3x+1\right)}=\dfrac{f}{x+1}+\dfrac{Ax+B}{x^{2}+3x+1}
+\end{equation}
+
+\vspace{-35pt}
+
+\begin{gather*}
+	f=\left. \dfrac{2x^{2}-x-1}{x^{2}+3x+1} \right|_{\vphantom{\dfrac{1}{1}} x=-1}=-2 \\
+	\text{两边同乘$x$,取$x\to\infty$极限，抓大头} \\
+	2=f+A,\hspace{1em} A=4 \\
+	\text{令$x=0$,}\hspace{1em} -1=f+B\hspace{1em},B=1
+\end{gather*}
+
+\fbox{题目\ref{liushufa-12}}
+
+\vspace*{-15pt}
+
+\begin{equation}\label{liushufa-12}
+	\dfrac{x+3}{\left(x-1\right)\left(x^{2}+1\right)}=\dfrac{2}{x-1}+\dfrac{-2x-1}{x^{2}+1} \hspace{1em} (过程略)
+\end{equation}
+
+\subsection{若$P$为一次式、$Q$为二次式($\Delta<0$)且$\dfrac{f}{P^2\cdot Q}$}
+
+\vspace{-10pt}
+
+\[\dfrac{f}{P^{2}\cdot Q}=\dfrac{f_{1}}{Q}+\dfrac{A}{P^{2}}+\dfrac{B}{P}\]
+
+\begin{itemize}
+	\item $f_1$用留数法(条件：$Q=0$)，即$f_{1}=\left. \dfrac{f}{P^2} \right|_{\vphantom{\dfrac{1}{1}} Q=0}$
+	\item $A$用留数法或赋值法(条件：$p=0$),即$A=\left. \dfrac{f}{Q} \right|_{\vphantom{\dfrac{1}{1}} P=0}$
+	\item $B$用极限法或赋值法
+\end{itemize}
+
+\fbox{题目\ref{liushufa-13}也即\ref{liushufa-5}}
+
+\vspace*{-10pt}
+
+\begin{equation}\label{liushufa-13}
+	\dfrac{3x+6}{\left(x-1\right)^{2}\left(x^{2}+x+1\right)}=\dfrac{f_{1}}{x^{2}+x+1}+\dfrac{A}{\left(x-1\right)^{2}}+\dfrac{B}{x-1}
+\end{equation}
+
+\vspace{-30pt}
+
+\begin{align*}
+	f_{1}&=\left. \dfrac{3x+6}{(x-1)^2} \right|_{\vphantom{\dfrac{1}{1}} x^{2}+x+1=0} = \dfrac{3x+6}{(x^{2}+x+1)-3x} = -\dfrac{x+2}{x} \\[5pt]
+	&=-\dfrac{\left(x+2\right)\left(x+1\right)}{x\left(x+1\right)}=-\dfrac{\left(x^{2}+x+1\right)+2x+1}{\left(x^{2}+x+1\right)-1}=2x+1
+\end{align*}
+
+\clearpage
+
+\vspace*{-50pt}
+
+\begin{gather*}
+	A=\left. \dfrac{3x+6}{x^{2}+x+1} \right|_{\vphantom{\dfrac{1}{1}} x=1}=3\\
+	\text{令$x=0$,\hspace{1em} $6=1+3-B$,\hspace{1em} $B=-2$}
+\end{gather*}
+
+基本上此题已经是考研数学中有理分式拆分的极限
+
+若遇到这种形式：$P$为二次式($\Delta<0$)，$Q$为二次式($\Delta<0$)
+
+\vspace{-30pt}
+
+\begin{gather*}
+	\dfrac{f}{P\cdot Q}=\dfrac{f_{1}}{P}+\dfrac{Ax+B}{Q}\\
+	\text{则\hspace{1em} $f_1$:留数法  \hspace{1em} $A$:极限法  \hspace{1em} $B$:赋值法}
+\end{gather*}
+
+\vspace{-10pt}
+
+处理方式类似\ref{liushufa-yicifang-erci}节中的方式

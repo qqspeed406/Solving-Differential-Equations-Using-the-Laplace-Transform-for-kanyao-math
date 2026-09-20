@@ -1,0 +1,184 @@
+\chapter{拉氏变换解积分方程}
+
+我们会经常碰到一种积分，被称为"变上限积分"，形如
+
+\vspace{-30pt}
+
+\begin{gather*}
+	\int_{0}^{x}\left(x-t\right)f\left(t\right)dt\:，\hspace{0.5em} \int_{0}^{x}tf\left(x-t\right)dt，\hspace{0.5em}
+	\int_{0}^{x}f\left(t\right)dt\:，\hspace{0.5em}\int_{0}^{x}f\left(x-t\right)dt
+\end{gather*}
+
+常规方法是变量代换再求导，较为繁琐。如果变上限积分出现在积分方程中，可以用拉氏变换来求解。
+
+\section{卷积概念}
+
+信号与系统中卷积到底是什么，如何理解呢，我找到了这篇博客作为参考
+
+\href{https://www.cnblogs.com/hedaihong/p/3680518.html}{卷积and拉普拉斯——意义}
+
+我们这里记住它的数学形式并应用即可,如式子\ref{jifenfangcheng-1}
+
+\fbox{概念}\hspace{1em} 设$x>0$,则$f_{1}\left(x\right)$与$f_{2}\left(x\right)$的卷积如下
+
+\vspace{-10pt}
+
+\begin{equation}\label{jifenfangcheng-1}
+	f_{1}\left(x\right)\ast f_{2}\left(x\right)=\int_{0}^{x}f_{1}\left(x-t\right)f_{2}\left(t\right)dt=\int_{0}^{x}f_{1}\left(t\right)f_{2}\left(x-t\right)dt
+\end{equation}
+
+\vspace{10pt}
+
+卷积公式可以用在概率论中，此处不详述。
+
+常见卷积形式有
+
+\vspace{-30pt}
+
+\begin{align*}
+	1\ast f\left(x\right)&=\int_{0}^{x}f\left(t\right)dt=\int_{0}^{x}f\left(x-t\right)dt\\[15pt]
+	x\ast f\left(x\right)&=\int_{0}^{x}\left(x-t\right)f\left(t\right)dt=\int_{0}^{x}tf\left(x-t\right)dt\\[15pt]
+	sinx\ast f\left(x\right)&=\int_{0}^{x}sin\left(x-t\right)f\left(t\right)dt=\int_{0}^{x}sin\left(t\right)f\left(x-t\right)dt
+\end{align*}
+
+\clearpage
+
+\section{卷积定理和例题}
+
+\vspace{-40pt}
+
+\begin{gather*}
+	\text{\fbox{卷积定理}}\hspace{2em} L\left\lbrack f_{1}\left(x\right)\ast f_{2}\left(x\right)\right\rbrack=L\left\lbrack f_{1}\left(x\right)\right\rbrack\cdot L\left\lbrack f_{2}\left(x\right)\right\rbrack\\[15pt]
+	\text{特别地，}\hspace{1em} L\left\lbrack\int_{0}^{x}f\left(t\right)dt\right\rbrack=L\left\lbrack1\ast f\left(x\right)\right\rbrack=\dfrac{L\left\lbrack f\left(x\right)\right\rbrack}{s}\\[5pt]
+	\text{此即为原函数的积分性质}
+\end{gather*}
+
+\fbox{题目\ref{jifenfangcheng-2}\hspace{0.5em}汤家凤直播课}
+
+\vspace*{-35pt}
+
+\begin{equation}\label{jifenfangcheng-2}
+   \text{$f(x)$连续}，\hspace{1em}f\left(0\right)=0，\hspace{1em}f^{\prime}\left(0\right)=\pi，\hspace{1em} \text{求}\lim\limits_{x\to0}\dfrac{sin\left(x\right)\cdot\int_{0}^{x}\left(x-t\right)f\left(t\right)dt}{x^{4}}
+\end{equation}
+
+\vspace*{-45pt}
+
+\begin{gather*}
+	\text{\fbox{\scriptsize 解析}}\hspace{1em}x\to0，sin(x)\sim x，\hspace{1em}\text{分子消去$sin(x)$,分母消去$x$}\\[15pt]
+	I=\lim\limits_{x\to0}\dfrac{sin\left(x\right)\cdot\int_{0}^{x}\left(x-t\right)f\left(t\right)dt}{x^{4}}=\lim\limits_{x\to0}\dfrac{\int_{0}^{x}\left(x-t\right)f\left(t\right)dt}{x^{3}}=\lim\limits_{x\to0}\dfrac{x\ast f\left(x\right)}{x^{3}}\\[15pt]
+	\text{对分式取拉式变换}\hspace{1em}\dfrac{L\left\lbrack x\ast f\left(x\right)\right\rbrack}{L\left\lbrack x^{3}\right\rbrack}=\dfrac{\tfrac{1}{s^{2}}\cdot L\left\lbrack f\left(x\right)\right\rbrack}{\tfrac{6}{s^{4}}}=\dfrac{L\left\lbrack f\left(x\right)\right\rbrack}{\tfrac{6}{s^{2}}}\\[10pt]
+	\text{取拉式逆变换}\hspace{1em} I=L^{-1}\left\lbrace\dfrac{L\left\lbrack f\left(x\right)\right\rbrack}{\dfrac{6}{s^{2}}}\right\rbrace=\lim\limits_{x\to0}\dfrac{f\left(x\right)}{6x}\xlongequal{洛必达}\lim\limits_{x\to0}\dfrac{f^{\prime}\left(0\right)}{6}
+\end{gather*}
+
+\vspace{-10pt}
+
+\fbox{题目\ref{jifenfangcheng-3}}
+
+\vspace*{-35pt}
+
+\begin{equation}\label{jifenfangcheng-3}
+	\text{求满足方程}\hspace{1em}\int_{0}^{x}f\left(t\right)dt=x+\int_{0}^{x}tf\left(x-t\right)dt\:\text{的可微函数}f(x)
+\end{equation}
+
+\vspace*{-45pt}
+
+\begin{gather*}
+	\text{\fbox{\scriptsize 解析}}\hspace{1em}\text{化为卷积形式}\hspace{1em}1\ast f\left(x\right)=x+x\ast f\left(x\right)\\[10pt]
+	\text{取拉氏变换}\hspace{1em}\dfrac{L\left\lbrack f\left(x\right)\right\rbrack}{s}=\dfrac{1}{s^{2}}+\dfrac{L\left\lbrack f\left(x\right)\right\rbrack}{s^{2}}\\[10pt]
+	\text{移项}\hspace{1em}L\left\lbrack f\left(x\right)\right\rbrack=\dfrac{1}{s-1}\\[5pt]
+	\text{取拉式逆变换}\hspace{1em}f\left(x\right)=e^{x}
+\end{gather*}
+
+\clearpage
+
+\fbox{题目\ref{jifenfangcheng-4}}
+
+\vspace*{-20pt}
+
+\begin{equation}\label{jifenfangcheng-4}
+	\text{$f(x)$为连续函数，且}\hspace{1em}f\left(x\right)=e^{x}+\int_{0}^{x}tf\left(x-t\right)dt，\hspace{1em}\text{求}f\left(x\right)
+\end{equation}
+
+\vspace{-40pt}
+
+\begin{gather*}
+	\text{\fbox{\scriptsize 解析}}\hspace{1em}f\left(x\right)=e^{x}+x\ast f\left(x\right)\\[15pt]
+	\text{取拉式变换}\hspace{1em}L\left\lbrack f\left(x\right)\right\rbrack=\dfrac{1}{s-1}+\dfrac{1}{s^{2}}\cdot L\left\lbrack f\left(x\right)\right\rbrack\\[15pt]
+	L\left\lbrack f\left(x\right)\right\rbrack=\dfrac{s^{2}}{\left(s-1\right)^{2}\left(s+1\right)}=\dfrac{A}{s+1}+\dfrac{B}{\left(s-1\right)^{2}}+\dfrac{C}{s-1}\\[15pt]
+	A=\left. \dfrac{s^{2}}{\left(s-1\right)^{2}} \right|_{\vphantom{\dfrac11} s=-1}=\dfrac14,\quad
+	B=\left. \dfrac{s^{2}}{s+1} \right|_{\vphantom{\dfrac11} s=1}=\dfrac12\\[10pt]
+	\text{对分式两边同乘$s$,取$s\to\infty$极限}\hspace{1em}1=A+0+C,\hspace{1em}C=\dfrac{3}{4}\\[15pt]
+	L\left\lbrack f\left(x\right)\right\rbrack=\dfrac{\tfrac{1}{4}}{s+1}+\dfrac{\tfrac{1}{2}}{\left(s-1\right)^{2}}+\dfrac{\tfrac{3}{4}}{s-1}\\[15pt]
+	\text{取拉式逆变换}\hspace{1em}f\left(x\right)=\dfrac{1}{4}e^{-x}+\dfrac{1}{2}x\cdot e^{x}+\dfrac{3}{4}e^{x}
+\end{gather*}
+
+
+\fbox{题目\ref{jifenfangcheng-5}\hspace{0.5em}(2016·数三)}
+
+\begin{center}
+	设$f(x)$连续，且满足
+\end{center}
+
+\vspace*{-20pt}
+
+\begin{equation}\label{jifenfangcheng-5}
+	\int_{0}^{x}f\left(x-t\right)dt=\int_{0}^{x}\left(x-t\right)f\left(t\right)dt+e^{-x}-1，\hspace{1em}\text{求}f(x)
+\end{equation}
+
+\vspace{-35pt}
+
+\begin{gather*}
+	\text{\fbox{\scriptsize 解析}}\hspace{1em}1\ast f\left(x\right)=x\ast f\left(x\right)+e^{x}-1\:\\[15pt]
+	\text{取拉式变换}\hspace{1em}\dfrac{1}{s}\cdot L\left\lbrack f\left(x\right)\right\rbrack=\dfrac{1}{s^{2}}\cdot L\left\lbrack f\left(x\right)\right\rbrack+\dfrac{1}{s+1}-\dfrac{1}{s}\\[15pt]
+	\text{移项}\hspace{1em}L\left\lbrack f\left(x\right)\right\rbrack=\dfrac{-s}{\left(s+1\right)\left(s-1\right)}=\dfrac{-\tfrac{1}{2}}{s+1}+\dfrac{-\tfrac{1}{2}}{s-1}\\[15pt]
+	\text{取拉式逆变换}\hspace{1em}f\left(x\right)=-\dfrac{1}{2}e^{-x}-\dfrac{1}{2}e^{x}
+\end{gather*}
+
+\clearpage
+
+\fbox{题目\ref{jifenfangcheng-6}\hspace{0.5em}(1989·数一)}
+
+\vspace*{-30pt}
+
+\begin{equation}\label{jifenfangcheng-6}
+	\text{设}\hspace{1em}f\left(x\right)=sinx-\int_{0}^{x}\left(x-t\right)f\left(t\right)dt\hspace{1em}\text{其中$f(x)$为连续函数，求$f(x)$}
+\end{equation}
+
+\vspace*{-55pt}
+
+\begin{gather*}
+	\text{\fbox{\scriptsize 解析}}\hspace{1em} f\left(x\right)=sinx-x\ast f\left(x\right)\\[10pt]
+	\text{取拉式变换}\hspace{1em}L\left\lbrack f\left(x\right)\right\rbrack=\dfrac{1}{s^{2}+1}-\dfrac{1}{s^{2}}\cdot L\left\lbrack f\left(x\right)\right\rbrack\\[15pt]
+	 L\left\lbrack f\left(x\right)\right\rbrack=\dfrac{s^{2}}{\left(s^{2}+1\right)^{2}}=\dfrac{s^{2}-1}{\left(s^{2}+1\right)^{2}}+\dfrac{1}{\left(s^{2}+1\right)^{2}}=\dfrac{s^{2}-1}{\left(s^{2}+1\right)^{2}}+\dfrac{1}{2}\cdot\dfrac{1}{s}\cdot\dfrac{2s}{\left(s^{2}+1\right)^{2}}\\[10pt]
+	 \text{取拉式逆变换}\hspace{1em} f\left(x\right)=x\cdot cosx+\dfrac{1}{2}\cdot\left\lbrack1\ast\left(x\cdot sinx\right)\right\rbrack\\[15pt]
+	 \text{查卷积形式}\hspace{1em} f\left(x\right)=x\cdot cosx+\dfrac{1}{2}\cdot\int_{0}^{x}t\cdot\left(sint\right)dt\\[10pt]
+	 \text{对于}\hspace{1em}\int_{0}^{x}t\cdot\left(sint\right)dt=\begin{vmatrix}1 & cost\\ t & sint\end{vmatrix}_{0}^{x}=sinx-x\cdot cosx\hspace{1em}\text{代回上式即可}
+\end{gather*}
+
+\vspace{-10pt}
+
+\fbox{题目\ref{jifenfangcheng-7}\hspace{0.5em}(李林模拟卷)}
+
+\vspace*{-30pt}
+
+\begin{equation}\label{jifenfangcheng-7}
+	\text{设$f(x)$连续，且}\hspace{1em}f\left(x\right)+\int_{0}^{x}\left(x-t\right)f\left(t\right)dt=2cosx-sinx\hspace{1em}\text{求$f(x)$}
+\end{equation}
+
+\vspace*{-50pt}
+
+\begin{gather*}
+	\text{\fbox{\scriptsize 解析}}\hspace{1em}f\left(x\right)+x\ast f\left(x\right)\:=2cosx-sinx\\[10pt] 
+	L\left\lbrack f\left(x\right)\right\rbrack+\dfrac{1}{s^{2}}\cdot L\left\lbrack f\left(x\right)\right\rbrack=\dfrac{2s}{s^{2}+1}-\dfrac{1}{s^{2}+1}\\[15pt] 
+	L\left\lbrack f\left(x\right)\right\rbrack=\dfrac{\left(2s-1\right)\cdot s^{2}}{\left(s^{2}+1\right)^{2}}=\dfrac{\left(2s-1\right)\cdot\left\lbrack\left(s^{2}+1\right)-1\right\rbrack}{\left(s^{2}+1\right)^{2}}\\[15pt]
+	L\left\lbrack f\left(x\right)\right\rbrack=2\cdot\dfrac{s}{s^{2}+1}-\dfrac{1}{s^{2}+1}-\dfrac{2s}{\left(s^{2}+1\right)^{2}}+\dfrac{1}{2}\cdot\dfrac{1}{s}\cdot\dfrac{2s}{\left(s^{2}+1\right)^{2}}\\[15pt]
+	\text{由\ref{jifenfangcheng-6}题，}\hspace{1em}\dfrac{1}{s}\cdot\dfrac{2s}{\left(s^{2}+1\right)^{2}}\hspace{1em}\text{对应}\hspace{1em}\int_{0}^{x}t\cdot\left(sint\right)dt=sinx-x\cdot cosx\\[5pt]
+	\text{对$L\left\lbrack f\left(x\right)\right\rbrack$取逆变换}\hspace{1em}f\left(x\right)=2cosx-sinx-x\cdot sinx+\dfrac{1}{2}\left(sinx-xcosx\right)
+\end{gather*}
+
+
+
+
+
+
+

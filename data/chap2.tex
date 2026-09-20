@@ -1,0 +1,158 @@
+%\thispagestyle{fancy}
+%\pagecolor{gray!3}
+\chapter{常见函数的拉氏变换}
+
+\begin{table}[H]
+	\centering
+	\caption{常见函数的拉氏变换速查表}
+	\label{tab:changjianhanshu-laplas}
+	% 关键：缩放行高为原来的1.5倍（1.3~1.8之间都合适，越大边距越大）
+	\renewcommand{\arraystretch}{1.25}
+	\resizebox{0.4\textwidth}{!}{%
+		\begin{tabular}{c|c}
+			\hline \hline
+		  像函数 $F\left(s\right)即L\left(y\right)$	& 原函数$f\left(x\right)$   \\ \hline
+		  1	& $\delta\left(x\right)$ \\ \hline
+		  $\dfrac{1}{s}$ & 1   \\ \hline
+		  $\dfrac{1}{s^{2}}$ & $x$ \\ \hline
+		  $\dfrac{n!}{s^{n+1}}$ & $x^{n}$  \\ \hline
+		  $\dfrac{1}{s-a}$ & $e^{ax}$ \\ \hline
+		  $\dfrac{n!}{\left(s-a\right)^{n+1}}$  &  $x^{n}\cdot e^{ax}$     \\ \hline
+		  $\dfrac{\omega}{s^{2}+\omega^{2}}$ & $sin\left(\omega x\right)\:$   \\ \hline
+		  $\dfrac{s}{s^{2}+\omega^{2}}$ & $cos\left(\omega x\right)$  \\ \hline
+		  $\dfrac{s^{2}-\omega^{2}}{\left(s^{2}+\omega^{2}\right)^{2}}$ & $x\cdot cos\left(\omega x\right)$  \\ \hline
+		  $\dfrac{2s\omega}{\left(s^{2}+\omega^{2}\right)^{2}}$ & $x\cdot sin\left(\omega x\right)$ 
+		   \\ \hline \hline
+		\end{tabular}%
+	}
+\end{table}
+
+\vspace{-10pt}
+
+\begin{spacing}{2.2}
+	表格\ref{tab:changjianhanshu-laplas}中总结了常见函数的拉式变换。尤其注意对$e^{ax}$的拉式变换，可看作是$e^{ax}\cdot1$，得结果为$\dfrac{1}{s-a}$，可以看作是函数$e^{ax}$对函数1作用后，函数1的拉式变换像函数由原来的$\dfrac{1}{s}$,变为了$\dfrac{1}{s-a}$，也即平移了$a$个单位。类似的，原函数$x^{n}$经拉氏变换后的像函数为$\dfrac{n!}{s^{\left(n+1\right)}}$，经过函数$e^{ax}$对函数$x^{n}$作用后，$x^{n}$的像函数变为$\dfrac{n!}{\left(s-a\right)^{n+1}}$，也即平移了$a$个单位。此处函数$e^{ax}$对函数$x、x^{2}、x^{n}、sin\left(\omega x\right)、cos\left(\omega x\right)$等进行作用，在其像函数上体现为平移$a$个单位，这样的性质称为"位移性质"或"位移定理"，之后的"位移性质"章节将进一步举例说明
+\end{spacing}
+
+\section{对$x^{n}$的拉氏变换}
+
+\vspace{-40pt}
+
+  \begin{gather*}
+  	L\left(x^{n}\right)=\int_{0}^{\infty}x^{n}\cdot e^{-sx}dx=\dfrac{n!}{s^{\left(n+1\right)}} \\[5pt] % 第1行：拉氏变换公式
+  	\text{特别地， } n=0 \text{ 时， } L\left(1\right)=\dfrac{1}{s} \\[5pt] % 第2行：n=0特殊情况
+  	\text{特别地， } s=1 \text{ 时， } \int_{0}^{\infty}x^{n}\cdot e^{-x}dx \text{，即为 } \gamma \text{ 函数} \\[5pt] % 第3行：s=1特殊情况
+  	\text{关于类 } \gamma \text{ 函数，还需记住两个公式(通常用于概率论中)} \\[5pt] % 第4行：说明文本
+  	\int_{-\infty}^{+\infty}e^{-\alpha x^{2}}dx=2\int_{0}^{+\infty}e^{-\alpha x^{2}}dx=\sqrt{\dfrac{\pi}{\alpha}} \\[5pt] % 第5行：高斯积分公式
+  	\text{此处 } \alpha=1 \text{ 时即为经典的概率论公式} \\[5pt] % 第6行：α=1说明
+  	\int_{-\infty}^{+\infty}x^{2}\cdot e^{-\alpha x^{2}}dx=2\int_{0}^{+\infty}x^{2}\cdot e^{-\alpha x^{2}}dx=\dfrac{1}{2\alpha}\sqrt{\dfrac{\pi}{\alpha}} \\[5pt] % 第7行：x²高斯积分
+  	\text{至于 } \quad \int_{0}^{+\infty}x\cdot e^{-\alpha x^{2}}dx \text{，凑微分} \\[5pt] % 第8行：x积分说明
+  	\quad\quad \int_{0}^{+\infty}x^{3}\cdot e^{-\alpha x^{2}}dx \text{，凑微分} \\[5pt] % 第9行：x³积分说明
+  	\text{此式适用于气体在平衡态下的麦克斯韦-玻尔兹曼速率分布定律，推导平均速率} \\[5pt] % 第10行：物理应用说明
+  	\quad\quad \int_{0}^{+\infty}x^{4}\cdot e^{-\alpha x^{2}}dx \text{，不必掌握} % 第11行：x⁴积分说明（最后一行不加\\）
+  \end{gather*}
+	
+
+\fbox{题目} \hspace{0.5em} (2018·数一)设总体$X$概率密度为$f\left(x;\sigma\right)=\dfrac{1}{2\sigma}\Eexp{-\tfrac{|x|}{\sigma}}$，$-\infty<x<+\infty$ 其中$\sigma\in\left(0,+\infty\right)$为未知参数，$X_1$,$X_2$...$X_n$为来自总体$X$的简单随机样本，记$\sigma$的最大似然估计量为$\hat\sigma$
+
+(1) 求$\hat\sigma$
+
+(2) 求$E\left(\hat\sigma\right)$，$D\left(\hat\sigma\right)$
+
+\vspace{-30pt}
+
+\begin{align*}
+	\hspace{-20em} \fbox{解析} \hspace{0.5em} &(1) \quad \hat\sigma=\dfrac{1}{n}\sum_{i=1}^{\infty}\left|X_{i}\right| \\[5pt]
+	&(2) \quad E\left(\hat\sigma\right)=E\left|X\right|=2\int_{0}^{\infty}\dfrac{1}{2\sigma}x\cdot \Eexp{-\tfrac{x}{\sigma}}dx=\dfrac{1}{\sigma}\cdot\dfrac{1}{\left(\tfrac{1}{\sigma}\right)^{2}}=\sigma
+\end{align*}
+
+\clearpage
+
+\vspace*{-50pt} % 再强制向上移动20pt，微调位置
+
+\begin{gather*}
+	E\left(X^{2}\right)=2\int_{0}^{\infty}\dfrac{1}{2\sigma}x^{2}\cdot \Eexp{-\tfrac{x}{\sigma}}dx=\dfrac{1}{\sigma}\cdot\dfrac{2}{\left(\tfrac{1}{\sigma}\right)^{3}}=2\sigma^{2} \\[0pt]
+	D\left(\left|X\right|\right)=E\left(X^{2}\right)-\left(E\left(X\right)\right)^{2}=\sigma^{2} \\[0pt]
+	D\left(\hat\sigma\right)=\dfrac{D\left(\left|X\right|\right)}{n}=\dfrac{\sigma^{2}}{n}
+\end{gather*}
+
+\vspace{-20pt}
+
+\fbox{题目}\hspace{0.5em}(2014·数一)设总体$X$的分布函数为$F\left(x;\theta\right)=\left\{\begin{matrix}1-\Eexp{-\tfrac{x^{2}}{\theta}}\:\:\:x\geqslant0\\ 0\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:其他\end{matrix}\right.$
+
+\vspace{5pt}
+
+其中$\theta$是未知参数且大于0，$X_1,X_2......X_n$为来自总体$X$的简单随机样本
+
+(1)求$E(X)$与$E(X^2)$ \hspace{2em}  (2)(3)略
+
+\vspace{-30pt}
+
+\begin{gather*}
+	% 第1行：解析框+公式，实现解析框左移、公式右对齐的居中效果
+	\hspace{-10em}\text{\fbox{解析}} \hspace{6em} f\left(x;\theta\right)=\dfrac{2x}{\theta}\Eexp{-\tfrac{x^{2}}{\theta}}\quad\left(x>0\right) \\[10pt]
+	% 第2行：E(X)公式，自动居中
+	E\left(X\right)=\int_{0}^{\infty}\dfrac{2x^{2}}{\theta}\Eexp{-\tfrac{x^{2}}{\theta}}dx=\dfrac{2}{\theta}\cdot\dfrac{1}{2}\cdot\dfrac{1}{2\cdot\tfrac{1}{\theta}}\sqrt{\dfrac{\pi}{\tfrac{1}{\theta}}}=\dfrac{\sqrt{\pi\cdot\theta}}{2} \\[10pt]
+	% 第3行：带变量替换箭头的E(X²)公式，自动居中（最后一行不加\\）
+	E\left(X^{2}\right)=\int_{0}^{\infty}\dfrac{2x^{3}}{\theta}\Eexp{-\tfrac{x^{2}}{\theta}}dx\:\xrightarrow[du=2xdx]{\text{令 } u=x^{2}}\int_{0}^{\infty}\dfrac{u}{\theta}\Eexp{-\tfrac{u}{\theta}}du=\dfrac{1}{\theta}\cdot\dfrac{1}{\left(\tfrac{1}{\theta}\right)^{2}}=\theta
+\end{gather*}
+
+%\vspace{-1cm}
+
+\section{对sin、cos三角函数的拉氏变换}
+
+\fbox{公式} \hspace{2em} $L\left\lbrack cos\left(\omega x\right)\right\rbrack=\dfrac{s}{s^{2}+\omega^{2}}\:\:\:\:,\:\:\:\:L\left\lbrack sin\left(\omega x\right)\right\rbrack=\dfrac{\omega}{s^{2}+\omega^{2}}\:$
+
+\vspace{-25pt}
+
+\begin{gather*}
+	% 第1行：证明框+拉氏变换公式，整体居中，证明框左移
+	\text{\fbox{证明}} \hspace{2em} L\left[\sin\left(\omega x\right)\right]=\int_{0}^{\infty}\sin\left(\omega x\right)\cdot \Eexp{-sx}dx \\[5pt]
+	% 第2行：参考公式，带行列式，文本+公式居中
+	\text{参考公式} \hspace{1em} \int \Eexp{ax}\cdot \sin\left(bx\right)dx=\dfrac{1}{a^{2}+b^{2}}\begin{vmatrix} \left(\Eexp{ax}\right)' & \left(\sin\left(bx\right)\right)' \\ \Eexp{ax} & \sin\left(bx\right) \end{vmatrix}+C \\[5pt]
+	% 第3行：文本说明，公式+中文居中对齐（最后一行不加\\）
+	L\left[\cos\left(\omega x\right)\right] \quad \text{证明类似，此处略}
+\end{gather*}
+
+\vspace{-10pt}
+
+\fbox{公式} \hspace{2em} $L\left(x\cdot cos\left(\omega x\right)\right)=\dfrac{s^{2}-\omega^{2}}{\left(s^{2}+\omega^{2}\right)^{2}}\:\:,\:\:\:\:L\left(x\cdot sin\left(\omega x\right)\right)=\dfrac{2\omega s}{\left(s^{2}+\omega^{2}\right)^{2}}$
+
+\begin{center}
+	\fbox{证明} \hspace{2em} $L\left(x\cdot sin\left(\omega x\right)\right)=-\dfrac{d}{ds}L\left(sin\left(\omega x\right)\right)=-\dfrac{d}{ds}\left\lbrack\dfrac{\omega}{s^{2}+\omega^{2}}\right\rbrack $ 即得
+\end{center}
+
+\section{使用拉氏变换解微分方程(和积分方程)的步骤}
+
+\begin{itemize}
+	\item 微分方程(或积分方程)+初始条件
+	\item 应用微分性质或积分性质，得代数方程
+	\item 应用有理分式拆分（将单独介绍）
+	\item 取拉式逆变换得解
+\end{itemize}
+
+\fbox{例题} \hspace{0.5em} 求解微分方程$y^{\prime\prime}-3y^{\prime}+2y=2e^{3x}\:\:,\:\:y\left(0\right)=y^{\prime}\left(0\right)=0$
+
+\vspace{-12pt}
+
+\begin{spacing}{2.5}
+	\begin{center}
+		\fbox{解析} \hspace{0.5em} 取拉式变换 \hspace{0.5em}
+		$s^{2}L\left(y\right)-3sL\left(y\right)+2L\left(y\right)=\dfrac{2}{s-3}$
+		
+		移项 \hspace{0.5em} $L\left(y\right)=\dfrac{2}{\left(s-1\right)\left(s-2\right)\left(s-3\right)}=\dfrac{1}{s-1}+\dfrac{-2}{s-2}+\dfrac{1}{s-3}$
+		\label{eg:2-3}
+		
+		取逆变换 \hspace{0.5em} $y=e^{x}-2e^{2x}+e^{3x}$
+	\end{center}
+\end{spacing}
+
+\vspace{-10pt}
+
+\fbox{疑问} \hspace{0.5em} 此处有理分式拆分是关键。这里是一次根，后续例题中还有二次重根，或者分母是一个二次方程形如$ax^{2}+bx+c$。那么有没有一种普适、快速、准确的有理分式拆分方法呢，这个问题问的好。有的，兄弟，有的。下面将系统地全面地介绍由本人独家总结的有理分式拆分方法体系
+
+
+
+
+
+
+
