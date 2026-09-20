@@ -1,0 +1,30 @@
+\babel@toc {english}{}\relax 
+\contentsline {chapter}{\numberline {1}拉氏变换概念以及性质}{1}{chapter.1}%
+\contentsline {section}{\numberline {1.1}拉式变换概念}{1}{section.1.1}%
+\contentsline {section}{\numberline {1.2}拉氏变换的性质}{2}{section.1.2}%
+\contentsline {subsection}{\numberline {1.2.1}原函数的微分性质}{2}{subsection.1.2.1}%
+\contentsline {subsection}{\numberline {1.2.2}像函数的微分性质}{4}{subsection.1.2.2}%
+\contentsline {subsection}{\numberline {1.2.3}原函数的积分性质}{4}{subsection.1.2.3}%
+\contentsline {subsection}{\numberline {1.2.4}位移性质}{4}{subsection.1.2.4}%
+\contentsline {chapter}{\numberline {2}常见函数的拉氏变换}{5}{chapter.2}%
+\contentsline {section}{\numberline {2.1}对$x^{n}$的拉氏变换}{6}{section.2.1}%
+\contentsline {section}{\numberline {2.2}对sin、cos三角函数的拉氏变换}{7}{section.2.2}%
+\contentsline {section}{\numberline {2.3}使用拉氏变换解微分方程(和积分方程)的步骤}{8}{section.2.3}%
+\contentsline {chapter}{\numberline {3}有理分式拆分}{9}{chapter.3}%
+\contentsline {section}{\numberline {3.1}留数法}{9}{section.3.1}%
+\contentsline {section}{\numberline {3.2}关于有理分式拆分中-极限法的介绍}{11}{section.3.2}%
+\contentsline {section}{\numberline {3.3}极限法(抓大头)+赋值法}{12}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}拆分原则}{12}{subsection.3.3.1}%
+\contentsline {section}{\numberline {3.4}各种拆分类型-例题讲解}{12}{section.3.4}%
+\contentsline {subsection}{\numberline {3.4.1}若$P,Q$为一次式$ax+b$且$\dfrac {f}{P\cdot Q}$}{12}{subsection.3.4.1}%
+\contentsline {subsection}{\numberline {3.4.2}若$P,Q$为一次式$ax+b$且$\dfrac {f}{P\cdot Q^2}$}{12}{subsection.3.4.2}%
+\contentsline {subsection}{\numberline {3.4.3}若$P$为一次式、$Q$为二次式($\Delta <0$)且$\dfrac {f}{P\cdot Q}$}{13}{subsection.3.4.3}%
+\contentsline {subsection}{\numberline {3.4.4}若$P$为一次式、$Q$为二次式($\Delta <0$)且$\dfrac {f}{P^2\cdot Q}$}{14}{subsection.3.4.4}%
+\contentsline {chapter}{\numberline {4}拉式变换解微分方程}{16}{chapter.4}%
+\contentsline {section}{\numberline {4.1}例题讲解}{16}{section.4.1}%
+\contentsline {section}{\numberline {4.2}位移定理(位移性质)}{21}{section.4.2}%
+\contentsline {chapter}{\numberline {5}拉氏变换解积分方程}{23}{chapter.5}%
+\contentsline {section}{\numberline {5.1}卷积概念}{23}{section.5.1}%
+\contentsline {section}{\numberline {5.2}卷积定理和例题}{24}{section.5.2}%
+\contentsline {chapter}{\numberline {6}对周期函数的拉氏变换}{27}{chapter.6}%
+\contentsline {chapter}{后记}{29}{chapter*.15}%
